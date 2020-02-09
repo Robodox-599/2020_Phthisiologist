@@ -16,3 +16,26 @@
  * command-specific namespaces within this header, which can then be used where
  * they are needed.
  */
+
+namespace DriveConstants
+{
+    constexpr int frontLeftMotorPort = 0;
+    constexpr int rearLeftMotorPort = 1;
+    constexpr int frontRightMotorPort = 2;
+    constexpr int rearRightMotorPort = 3;
+
+    constexpr int leftEncoderPort = 1;
+    constexpr int rightEncoderPort = 3;
+
+    constexpr int pigeonPort = 0;
+}
+
+namespace ControllerConstants
+{
+    constexpr int xboxPort = 0;
+    constexpr int joystickPort = 1;
+    constexpr int xboxA = 1;
+    constexpr int xboxB = 2;
+    constexpr int xboxX = 3;
+    constexpr int xboxY = 4;
+}

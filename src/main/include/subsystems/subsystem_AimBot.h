@@ -8,25 +8,17 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
-#include <ctre/Phoenix.h>
 
-class subsystem_Drive : public frc2::SubsystemBase {
+class subsystem_AimBot : public frc2::SubsystemBase {
  public:
-  subsystem_Drive();
+  subsystem_AimBot();
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic();
-  void JoystickPercentDrive(double x, double y);
-
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-  TalonSRX frontLeftMotor;
-  TalonSRX rearLeftMotor;
-  TalonSRX frontRightMotor;
-  TalonSRX rearRightMotor;
-  PigeonIMU pGyon;
 };
