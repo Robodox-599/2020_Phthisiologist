@@ -6,8 +6,22 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/subsystem_AimBot.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
-subsystem_AimBot::subsystem_AimBot() {}
+subsystem_AimBot::subsystem_AimBot() 
+{
+    printf("aimbot init");
+    table = nt::NetworkTableInstance::GetDefault();
+    cameraTable = table.GetTable("chameleon-vision")->GetSubTable("Microsoft LifeCam HD-3000");
+    yaw = cameraTable->GetEntry("targetYaw");
+}
 
 // This method will be called once per scheduler run
 void subsystem_AimBot::Periodic() {}
+
+double subsystem_AimBot::AimBotYaw()
+{
+    printf("yaw: %f\n", yaw.GetDouble(0));
+    frc::SmartDashboard::PutNumber("yaw", yaw.GetDouble(0));
+    return yaw.GetDouble(0);
+}

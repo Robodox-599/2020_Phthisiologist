@@ -6,10 +6,11 @@
 /*----------------------------------------------------------------------------*/
 
 #include "RobotContainer.h"
+#include "commands/AimBotDefault.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand() {
   // Initialize all of your commands and subsystems here
-
+  m_aimBot.SetDefaultCommand(AimBotDefault(&m_aimBot));
   // Configure the button bindings
   ConfigureButtonBindings();
 }
