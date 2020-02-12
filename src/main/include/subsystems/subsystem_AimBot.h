@@ -21,11 +21,13 @@ class subsystem_AimBot : public frc2::SubsystemBase {
    */
   void Periodic();
   double AimBotYaw();
+  void ConvertMode();
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
   nt::NetworkTableEntry yaw;
+  bool driverMode;
   nt::NetworkTableInstance table;
   std::shared_ptr<NetworkTable> cameraTable;
 };

@@ -7,6 +7,7 @@
 
 #include "RobotContainer.h"
 #include "commands/AimBotDefault.h"
+#include "commands/AimBotCameraMode.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand() {
   // Initialize all of your commands and subsystems here
@@ -17,6 +18,9 @@ RobotContainer::RobotContainer() : m_autonomousCommand() {
 
 void RobotContainer::ConfigureButtonBindings() {
   // Configure your button bindings here
+  frc2::JoystickButton xboxA{&xbox, ControllerConstants::xboxA};
+
+  xboxA.WhenPressed(AimBotCameraMode(&m_aimBot));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
