@@ -23,7 +23,7 @@ void subsystem_AimBot::Periodic() {}
 
 double subsystem_AimBot::AimBotYaw()
 {
-    printf("yaw: %f\n", yaw.GetDouble(0));
+    //printf("yaw: %f\n", yaw.GetDouble(0));
     frc::SmartDashboard::PutNumber("yaw", yaw.GetDouble(0));
     return yaw.GetDouble(0);
 }
