@@ -9,10 +9,12 @@
 #include "commands/AimBotDefault.h"
 #include "commands/AimBotCameraMode.h"
 #include "commands/AimBotAutoAim.h"
+#include "commands/DriveDefault.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand() {
   // Initialize all of your commands and subsystems here
   m_aimBot.SetDefaultCommand(AimBotDefault(&m_aimBot));
+  m_drive.SetDefaultCommand(DriveDefault(&m_drive, [this] {return xbox.GetRawAxis(1);}, [this] {return xbox.GetRawAxis(4);}));
   // Configure the button bindings
   ConfigureButtonBindings();
 }

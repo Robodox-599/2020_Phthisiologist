@@ -19,10 +19,10 @@
 
 namespace DriveConstants
 {
-    constexpr int frontLeftMotorPort = 0;
-    constexpr int rearLeftMotorPort = 1;
-    constexpr int frontRightMotorPort = 2;
-    constexpr int rearRightMotorPort = 3;
+    constexpr int frontLeftMotorPort = 1;
+    constexpr int rearLeftMotorPort = 2;
+    constexpr int frontRightMotorPort = 3;
+    constexpr int rearRightMotorPort = 4;
 
     constexpr int leftEncoderPort = 1;
     constexpr int rightEncoderPort = 3;

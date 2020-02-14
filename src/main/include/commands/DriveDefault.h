@@ -9,9 +9,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-#include "subsystems/subsystem_AimBot.h"
 #include "subsystems/subsystem_Drive.h"
-#include "frc/Timer.h"
 
 /**
  * An example command.
@@ -20,10 +18,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class AimBotAutoAim
-    : public frc2::CommandHelper<frc2::CommandBase, AimBotAutoAim> {
+class DriveDefault
+    : public frc2::CommandHelper<frc2::CommandBase, DriveDefault> {
  public:
-  AimBotAutoAim(subsystem_AimBot* aimBot, subsystem_Drive* drive);
+  DriveDefault(subsystem_Drive* drive, std::function<double()> rotation, std::function<double()> forward);
 
   void Initialize() override;
 
@@ -32,15 +30,9 @@ class AimBotAutoAim
   void End(bool interrupted) override;
 
   bool IsFinished() override;
+
   private:
-  frc::Timer timer;
-  subsystem_AimBot* m_aimBot;
-  subsystem_Drive* m_drive;
-  double m_yaw;
-  double m_power;
-  double m_kF;
-  double m_kP;
-  double m_kI;
-  double i;
-  bool linedUp;
+  std::function<double()> m_forward;
+  std::function<double()> m_rotation;
+  subsystem_Drive* m_subsystem;
 };

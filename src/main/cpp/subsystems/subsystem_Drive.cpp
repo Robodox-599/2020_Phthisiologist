@@ -13,21 +13,21 @@ frontLeftMotor(DriveConstants::frontLeftMotorPort), rearLeftMotor(DriveConstants
 frontRightMotor(DriveConstants::frontRightMotorPort), rearRightMotor(DriveConstants::rearRightMotorPort),
 pGyon(DriveConstants::pigeonPort)
 {
-    frontLeftMotor.SetInverted(true);
-    rearLeftMotor.SetInverted(true);
-    frontRightMotor.SetInverted(false);
-    rearRightMotor.SetInverted(false);
+    frontLeftMotor.SetInverted(false);
+	rearLeftMotor.SetInverted(false);
+	frontRightMotor.SetInverted(true);
+	rearRightMotor.SetInverted(true);
 
-    rearLeftMotor.SetSensorPhase(true);
-    rearRightMotor.SetSensorPhase(false);
+    // rearLeftMotor.SetSensorPhase(true);
+    // rearRightMotor.SetSensorPhase(false);
 
     // rearLeftMotor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 0);
     // rearRightMotor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 0);
 
-    rearLeftMotor.SetSelectedSensorPosition(0, 0, 0);
-    rearRightMotor.SetSelectedSensorPosition(0, 0, 0);
+    // rearLeftMotor.SetSelectedSensorPosition(0, 0, 0);
+    // rearRightMotor.SetSelectedSensorPosition(0, 0, 0);
 
-    pGyon.SetYaw(0, 0);
+    // pGyon.SetYaw(0, 0);
 }
 
 // This method will be called once per scheduler run
@@ -64,8 +64,8 @@ void subsystem_Drive::JoystickPercentDrive(double x, double y)
 		x = 0;
 	}
 
-	l = y-x;
-	r = y+x;
+	l = -y+x;
+	r = -y-x;
 
 	frontLeftMotor.Set(ControlMode::PercentOutput, l);
 	rearLeftMotor.Set(ControlMode::PercentOutput, l);
