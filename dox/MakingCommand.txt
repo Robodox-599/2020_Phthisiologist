@@ -1,0 +1,19 @@
+1) Right-click subsystems folder, choose "Create new class/command"
+
+2) From the Command Palette,  choose "Command (New)" and enter a name.  New files will be created, .cpp and .h
+
+3) Include subsystem.h file(s) (.h)
+
+4) Add private member variables for required subsystems (.h)
+
+4) Add subsystem parameters to constructor (.h and .cpp)
+
+5) Add initializers for member variables to constructor (.cpp)
+
+6) Add addRequirements() in constructor
+
+7) Fill in Initialize, Execute, IsFinished, End functions as required
+
+8) ???
+
+9) PROFIT!

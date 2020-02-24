@@ -1,0 +1,23 @@
+1) Right-click subsystems folder, choose "Create new class/command"
+
+2) From the Command Palette,  choose "Subsystem (New)" and enter a name.  New files will be created, .cpp and .h
+
+3) Include the appropriate libraries in the .h
+	#include "ctre/phoenix.h"
+	#include <something something spark>
+	#include <sensors, etc>
+
+4) Declare Talon/Spark/Sensor private member variables in .h file
+
+5) Create initializers in constructor
+
+6) Create member functions to operate motors/actuators and read sensors - prototypes in .h and implementation in .cpp
+
+7) Add member variable subsystem to RobotContainer
+
+
+
+
+
+ 
+ 
