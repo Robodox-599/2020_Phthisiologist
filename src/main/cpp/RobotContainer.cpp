@@ -21,8 +21,8 @@ RobotContainer::RobotContainer() : m_autonomousCommand() {
 
 void RobotContainer::ConfigureButtonBindings() {
   // Configure your button bindings here
-  frc2::JoystickButton xboxA{&xbox, ControllerConstants::xboxA};
-  frc2::JoystickButton xboxB{&xbox, ControllerConstants::xboxB};
+  frc2::JoystickButton xboxA(&xbox, ControllerConstants::xboxA);
+  frc2::JoystickButton xboxB(&xbox, ControllerConstants::xboxB);
 
   xboxA.WhenPressed(AimBotCameraMode(&m_aimBot));
   xboxB.WhenPressed(AimBotAutoAim(&m_aimBot, &m_drive));

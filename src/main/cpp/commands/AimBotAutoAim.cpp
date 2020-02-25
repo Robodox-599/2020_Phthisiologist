@@ -12,21 +12,28 @@ AimBotAutoAim::AimBotAutoAim(subsystem_AimBot* aimBot, subsystem_Drive* drive) :
   AddRequirements({aimBot, drive});
   m_power = 0;
   m_kF = 0.1;
-  m_kP = 0.02;
-  m_kI = 0.0038;
+  m_kP = 0.015;
+  m_kI = 0.003;
 }
 
 // Called when the command is initially scheduled.
-void AimBotAutoAim::Initialize() {timer.Stop(); timer.Reset(); linedUp = false;}
+void AimBotAutoAim::Initialize() 
+{
+  timer.Stop();
+  timer.Reset();
+  linedUp = false;
+  prevPosition = m_aimBot->AimBotYaw();  
+}
 
 // Called repeatedly when this Command is scheduled to run
 void AimBotAutoAim::Execute() 
 {
   m_yaw = m_aimBot->AimBotYaw();
-  if(m_yaw < 8 && m_yaw > -8)
+  nextPosition = m_yaw - (prevPosition - m_yaw);
+  if(nextPosition < 12 && nextPosition > -12)
   {
-    double maxI = 40;
-    i += m_yaw;
+    double maxI = 65;
+    i += nextPosition;
     if(i > maxI)
     {
       i = maxI;
@@ -41,7 +48,7 @@ void AimBotAutoAim::Execute()
     i = 0;
   }
   
-  if(m_yaw > 0)
+  if(nextPosition > 0)
   {
     m_power = m_kF + (m_yaw * m_kP) + (i * m_kI);
   }
@@ -53,6 +60,7 @@ void AimBotAutoAim::Execute()
   // printf("power: %f \n", m_power);
   // printf("yaw: %f \n", m_yaw);
   printf("i gain: %f \n", i);
+  printf("next position value: %f \n", nextPosition);
   m_drive->JoystickPercentDrive(m_power, 0);
   if(m_yaw < 0.5 && m_yaw > -0.5)
   {
@@ -60,7 +68,7 @@ void AimBotAutoAim::Execute()
     printf("in the if statement");
     timer.Start();
     printf("timer %f \n", timer.Get());
-    if(timer.Get() > 0.4)
+    if(timer.Get() > 0.2)
     {
       linedUp = true;
     }
@@ -70,7 +78,7 @@ void AimBotAutoAim::Execute()
     timer.Stop();
     timer.Reset();
   }
-  
+  prevPosition = m_yaw;
 }
 
 // Called once the command ends or is interrupted.

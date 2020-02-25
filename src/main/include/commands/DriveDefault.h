@@ -32,7 +32,7 @@ class DriveDefault
   bool IsFinished() override;
 
   private:
-  std::function<double()> m_forward;
-  std::function<double()> m_rotation;
   subsystem_Drive* m_subsystem;
+  std::function<double()> m_rotation;
+  std::function<double()> m_forward;
 };

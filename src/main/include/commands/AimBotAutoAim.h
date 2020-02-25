@@ -32,7 +32,7 @@ class AimBotAutoAim
   void End(bool interrupted) override;
 
   bool IsFinished() override;
-  private:
+private:
   frc::Timer timer;
   subsystem_AimBot* m_aimBot;
   subsystem_Drive* m_drive;
@@ -42,5 +42,7 @@ class AimBotAutoAim
   double m_kP;
   double m_kI;
   double i;
+  double prevPosition;
+  double nextPosition;
   bool linedUp;
 };
