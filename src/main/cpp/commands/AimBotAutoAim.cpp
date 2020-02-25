@@ -62,7 +62,7 @@ void AimBotAutoAim::Execute()
   printf("i gain: %f \n", i);
   printf("next position value: %f \n", nextPosition);
   m_drive->JoystickPercentDrive(m_power, 0);
-  if(m_yaw < 0.5 && m_yaw > -0.5)
+  if(nextPosition < 0.5 && nextPosition > -0.5)
   {
     i = 0;
     printf("in the if statement");
