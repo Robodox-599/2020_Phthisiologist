@@ -5,21 +5,24 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/JoystickDrive.h"
-#include "Robot.h"
+#include "commands/command_DriveByJoystick.h"
 
-JoystickDrive::JoystickDrive() {
+command_DriveByJoystick::command_DriveByJoystick(subsystem_Drive *theDrive, std::function<double()> xAxis, std::function<double()> yAxis)
+  : m_subsystem_Drive{theDrive}, m_xAxis{xAxis}, m_yAxis{yAxis} {
   // Use addRequirements() here to declare subsystem dependencies.
+  AddRequirements({m_subsystem_Drive});
 }
 
 // Called when the command is initially scheduled.
-void JoystickDrive::Initialize() {}
+void command_DriveByJoystick::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void JoystickDrive::Execute() {}
+void command_DriveByJoystick::Execute() {
+  m_subsystem_Drive->JoystickPowerDrive(m_xAxis(), m_yAxis());
+}
 
 // Called once the command ends or is interrupted.
-void JoystickDrive::End(bool interrupted) {}
+void command_DriveByJoystick::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool JoystickDrive::IsFinished() { return false; }
+bool command_DriveByJoystick::IsFinished() { return false; }

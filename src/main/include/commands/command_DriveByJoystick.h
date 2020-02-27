@@ -18,10 +18,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class JoystickDrive
-    : public frc2::CommandHelper<frc2::CommandBase, JoystickDrive> {
+class command_DriveByJoystick
+    : public frc2::CommandHelper<frc2::CommandBase, command_DriveByJoystick> {
  public:
-  JoystickDrive();
+  command_DriveByJoystick(subsystem_Drive *theDrive, std::function<double()> xAxis, std::function<double()> yAxis);
 
   void Initialize() override;
 
@@ -30,4 +30,9 @@ class JoystickDrive
   void End(bool interrupted) override;
 
   bool IsFinished() override;
+
+ private:
+  subsystem_Drive *m_subsystem_Drive;
+  std::function<double()> m_xAxis;
+  std::function<double()> m_yAxis;
 };

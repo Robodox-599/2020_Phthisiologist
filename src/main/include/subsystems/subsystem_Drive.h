@@ -9,12 +9,15 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include "ctre/Phoenix.h"
+#include "rev/CANSparkMax.h"
+#include "Constants.h"
 
 class subsystem_Drive : public frc2::SubsystemBase {
  public:
   subsystem_Drive();
 
   void JoystickVelocityDrive(double x, double y);
+  void JoystickPowerDrive(double x, double y);
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.
@@ -24,9 +27,8 @@ class subsystem_Drive : public frc2::SubsystemBase {
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-  TalonSRX frontLeftMotor;
-  TalonSRX frontRightMotor;
-  TalonSRX rearLeftMotor;
-  TalonSRX rearRightMotor;
-
+  rev::CANSparkMax m_frontLeftMotor;
+  rev::CANSparkMax m_frontRightMotor;
+  rev::CANSparkMax m_rearLeftMotor;
+  rev::CANSparkMax m_rearRightMotor;
 };

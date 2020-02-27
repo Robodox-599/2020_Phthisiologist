@@ -8,8 +8,10 @@
 #pragma once
 
 #include <frc2/command/Command.h>
+#include <frc/Joystick.h>
 
 #include "commands/placeHolder.h"
+#include "commands/command_DriveByJoystick.h"
 #include "subsystems/subsystem_Climb.h"
 #include "subsystems/subsystem_Drive.h"
 #include "subsystems/subsystem_Intake.h"
@@ -36,6 +38,7 @@ class RobotContainer {
   subsystem_Intake m_intake;
   subsystem_Shooter m_shooter;
   placeHolder m_autonomousCommand;
+  frc::Joystick m_mainController;
 
   void ConfigureButtonBindings();
 };

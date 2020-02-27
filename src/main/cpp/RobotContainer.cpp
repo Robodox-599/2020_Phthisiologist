@@ -7,8 +7,10 @@
 
 #include "RobotContainer.h"
 
-RobotContainer::RobotContainer() : m_autonomousCommand() {
+RobotContainer::RobotContainer() : m_autonomousCommand(), m_mainController{0} {
   // Initialize all of your commands and subsystems here
+  m_drive.SetDefaultCommand(command_DriveByJoystick(&m_drive, [this] {return m_mainController.GetRawAxis(1);},
+  [this] {return m_mainController.GetRawAxis(4);}));
 
   // Configure the button bindings
   ConfigureButtonBindings();
