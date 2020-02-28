@@ -18,6 +18,7 @@ class subsystem_Drive : public frc2::SubsystemBase {
 
   void JoystickVelocityDrive(double x, double y);
   void JoystickPowerDrive(double x, double y);
+  void MoveDistance(int inches);
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.
@@ -31,4 +32,13 @@ class subsystem_Drive : public frc2::SubsystemBase {
   rev::CANSparkMax m_frontRightMotor;
   rev::CANSparkMax m_rearLeftMotor;
   rev::CANSparkMax m_rearRightMotor;
+
+  rev::CANEncoder m_leftEncoder = m_frontLeftMotor.GetEncoder();
+  rev::CANEncoder m_rightEncoder = m_frontRightMotor.GetEncoder();
+
+  rev::CANPIDController m_leftPidController = m_frontLeftMotor.GetPIDController();
+  rev::CANPIDController m_rightPidController = m_frontRightMotor.GetPIDController();
+  
+  void SetPositionControl();
+  int ConvertInchesToRotations(int inches);
 };

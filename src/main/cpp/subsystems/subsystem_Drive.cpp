@@ -17,6 +17,43 @@ subsystem_Drive::subsystem_Drive() :
   m_frontRightMotor.SetInverted(true);
   m_rearLeftMotor.SetInverted(false);
   m_rearRightMotor.SetInverted(true);
+
+  m_rearLeftMotor.Follow(m_frontLeftMotor);
+  m_rearRightMotor.Follow(m_frontRightMotor);
+}
+
+void subsystem_Drive::SetPositionControl()
+{
+  double kP = 0.1, kI = 1e-4, kD = 1, kIz = 0, kFF = 0, kMaxOutput = 1, kMinOutput = -1;
+
+  m_leftPidController.SetP(kP);
+  m_leftPidController.SetI(kI);
+  m_leftPidController.SetD(kD);
+  m_leftPidController.SetIZone(kIz);
+  m_leftPidController.SetFF(kFF);
+  m_leftPidController.SetOutputRange(kMinOutput, kMaxOutput);
+
+  m_rightPidController.SetD(kD);
+  m_rightPidController.SetI(kI);
+  m_rightPidController.SetP(kP);
+  m_rightPidController.SetIZone(kIz);
+  m_rightPidController.SetFF(kFF);
+  m_rightPidController.SetOutputRange(kMinOutput, kMaxOutput);
+}
+
+void subsystem_Drive::MoveDistance(int inches)
+{
+  SetPositionControl();
+  m_leftPidController.SetReference(ConvertInchesToRotations(inches), rev::ControlType::kPosition);
+  m_rightPidController.SetReference(ConvertInchesToRotations(inches), rev::ControlType::kPosition);
+}
+
+int subsystem_Drive::ConvertInchesToRotations(int inches)
+{
+  double wheelDiameter = 6;
+  double gearRatio = 1;
+
+  return ((inches)/(wheelDiameter*3.14))*gearRatio;
 }
 
 // void subsystem_Drive::JoystickVelocityDrive(double x, double y)
