@@ -7,12 +7,16 @@
 
 #include "commands/command_DriveByDistance.h"
 
-command_DriveByDistance::command_DriveByDistance(int inches) {
+command_DriveByDistance::command_DriveByDistance(subsystem_Drive *theDrive, int inches)
+  : m_subsystem_Drive{theDrive}, m_inches{inches} {
   // Use addRequirements() here to declare subsystem dependencies.
+  AddRequirements({m_subsystem_Drive});
 }
 
 // Called when the command is initially scheduled.
-void command_DriveByDistance::Initialize() {}
+void command_DriveByDistance::Initialize() {
+  m_subsystem_Drive->DriveDistance(m_inches);
+}
 
 // Called repeatedly when this Command is scheduled to run
 void command_DriveByDistance::Execute() {}

@@ -18,8 +18,10 @@ class subsystem_Intake : public frc2::SubsystemBase {
   void SetIntakeUp();
   void SetIntakeDown();
   bool IsIntakeDeployed();
-  void SetIntakeRollersOn();
-  void SetIntakeRollersOff();
+  void SetIntakeWheelsOn();
+  void SetIntakeWheelsOff();
+  void SetIndexerOn(double leftPower, double rightPower);
+  void SetIndexerOff();
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.
@@ -28,6 +30,8 @@ class subsystem_Intake : public frc2::SubsystemBase {
 
  private:
   TalonSRX m_intakeMotor;
+  TalonSRX m_leftIndexerMotor;
+  TalonSRX m_rightIndexerMotor;
   frc::DoubleSolenoid m_intakePiston;
   bool m_isIntakeDeployed;
   // Components (e.g. motor controllers and sensors) should generally be

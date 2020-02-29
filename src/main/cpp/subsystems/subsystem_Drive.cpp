@@ -41,7 +41,7 @@ void subsystem_Drive::SetPositionControl()
   m_rightPidController.SetOutputRange(kMinOutput, kMaxOutput);
 }
 
-void subsystem_Drive::MoveDistance(int inches)
+void subsystem_Drive::DriveDistance(int inches)
 {
   SetPositionControl();
   m_leftPidController.SetReference(ConvertInchesToRotations(inches), rev::ControlType::kPosition);
@@ -55,75 +55,6 @@ int subsystem_Drive::ConvertInchesToRotations(int inches)
 
   return ((inches)/(wheelDiameter*3.14))*gearRatio;
 }
-
-// void subsystem_Drive::JoystickVelocityDrive(double x, double y)
-// {
-//   double l;
-//   double r;
-//   double leftOutput;
-//   double rightOutput;
-//   double increment = 600;
-
-//   if (y > 0.2)
-//   {
-//     y = (y - 0.2) * (1 / .8) * 3000 /**max velocity*/;
-//   }
-//   else if (y < -0.2)
-//   {
-//     y = (y + 0.2) * 1 / .8 * 3000 /**max velocity*/;
-//   }
-//   else
-//   {
-//     y = 0;
-//   }
-
-//   if (x > 0.2)
-//   {
-//     x = (x - 0.2) * 1 / .8 * 1500 /**max velocity/2*/;
-//   }
-//   else if (x < -0.2)
-//   {
-//     x = (x + 0.2) * 1 / .8 * 1500 /**max velocity/2*/;
-//   }
-//   else
-//   {
-//     x = 0;
-//   }
-
-//   l = -y + x;
-//   r = -y - x;
-
-//   if (l > m_rearLeftMotor.GetSelectedSensorVelocity(0) + increment)
-//   {
-//     leftOutput = m_rearLeftMotor.GetSelectedSensorVelocity(0) + increment;
-//   }
-//   else if (l < m_rearLeftMotor.GetSelectedSensorVelocity(0) - increment)
-//   {
-//     leftOutput = m_rearLeftMotor.GetSelectedSensorVelocity(0) - increment;
-//   }
-//   else
-//   {
-//     leftOutput = l;
-//   }
-
-//   if (r > m_rearRightMotor.GetSelectedSensorVelocity(0) + increment)
-//   {
-//     rightOutput = m_rearRightMotor.GetSelectedSensorVelocity(0) + increment;
-//   }
-//   else if (r < m_rearRightMotor.GetSelectedSensorVelocity(0) - increment)
-//   {
-//     rightOutput = m_rearRightMotor.GetSelectedSensorVelocity(0) - increment;
-//   }
-//   else
-//   {
-//     rightOutput = r;
-//   }
-
-//   m_frontLeftMotor.Set(ControlMode::Follower, 1);
-//   m_rearLeftMotor.Set(ControlMode::Velocity, leftOutput);
-//   m_frontRightMotor.Set(ControlMode::Follower, 3);
-//   m_rearRightMotor.Set(ControlMode::Velocity, rightOutput);
-// }
 
 void subsystem_Drive::JoystickPowerDrive(double x, double y)
 {

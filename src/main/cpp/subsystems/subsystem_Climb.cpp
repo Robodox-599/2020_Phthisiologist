@@ -7,32 +7,32 @@
 
 #include "subsystems/subsystem_Climb.h"
 
-subsystem_Climb::subsystem_Climb() : m_LeftWinchMotor(0), m_RightWinchMotor(0), m_SlideMotor(0), m_ClimbArmMotor(0), m_LockSolenoid(0,0) {
-    m_LeftWinchMotor.Set(ControlMode::PercentOutput, 0);
-    m_RightWinchMotor.Set(ControlMode::PercentOutput, 0);
-    m_RightWinchMotor.SetInverted(true);
-    m_LeftWinchMotor.SetInverted(false);
-    m_RightWinchMotor.Follow(m_LeftWinchMotor);
+subsystem_Climb::subsystem_Climb() : m_leftWinchMotor(0), m_rightWinchMotor(0), m_slideMotor(0), m_climbArmMotor(0), m_lockSolenoid(0,0) {
+    m_leftWinchMotor.Set(ControlMode::PercentOutput, 0);
+    m_rightWinchMotor.Set(ControlMode::PercentOutput, 0);
+    m_rightWinchMotor.SetInverted(true);
+    m_leftWinchMotor.SetInverted(false);
+    m_rightWinchMotor.Follow(m_leftWinchMotor);
 
-    m_SlideMotor.Set(ControlMode::PercentOutput, 0);
+    m_slideMotor.Set(ControlMode::PercentOutput, 0);
 
-    m_ClimbArmMotor.Set(ControlMode::PercentOutput, 0);
+    m_climbArmMotor.Set(ControlMode::PercentOutput, 0);
 }
 
 void subsystem_Climb::SetWinchMotorPower(double power)
 {
-    m_LeftWinchMotor.Set(ControlMode::PercentOutput, power);
+    m_leftWinchMotor.Set(ControlMode::PercentOutput, power);
 }
 
 void subsystem_Climb::LockClimb()
 {
-    m_LockSolenoid.Set(frc::DoubleSolenoid::kReverse);
+    m_lockSolenoid.Set(frc::DoubleSolenoid::kReverse);
     m_isClimbLocked = true;
 }
 
 void subsystem_Climb::UnlockClimb()
 {
-    m_LockSolenoid.Set(frc::DoubleSolenoid::kForward);
+    m_lockSolenoid.Set(frc::DoubleSolenoid::kForward);
     m_isClimbLocked = false;
 }
 
@@ -43,12 +43,12 @@ bool subsystem_Climb::IsClimbLocked()
 
 void subsystem_Climb::SetSlideMotorPower(double power)
 {
-    m_SlideMotor.Set(ControlMode::PercentOutput, power);
+    m_slideMotor.Set(ControlMode::PercentOutput, power);
 }
 
 void subsystem_Climb::SetClimbArmMotorPower(double power)
 {
-    m_ClimbArmMotor.Set(ControlMode::PercentOutput, power);
+    m_climbArmMotor.Set(ControlMode::PercentOutput, power);
 }
 
 // This method will be called once per scheduler run

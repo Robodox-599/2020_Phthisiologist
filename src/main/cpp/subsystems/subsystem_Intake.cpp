@@ -7,9 +7,11 @@
 
 #include "subsystems/subsystem_Intake.h"
 
-subsystem_Intake::subsystem_Intake() : m_intakeMotor(0), m_intakePiston(0,0)
+subsystem_Intake::subsystem_Intake() : m_intakeMotor(0), m_leftIndexerMotor(0), m_rightIndexerMotor(0), m_intakePiston(0,0)
 {
     m_intakeMotor.Set(ControlMode::PercentOutput, 0);
+    m_leftIndexerMotor.Set(ControlMode::PercentOutput, 0);
+    m_rightIndexerMotor.Set(ControlMode::PercentOutput, 0);
 }
 
 void subsystem_Intake::SetIntakeUp()
@@ -29,17 +31,28 @@ bool subsystem_Intake::IsIntakeDeployed()
     return m_isIntakeDeployed;
 }
 
-void subsystem_Intake::SetIntakeRollersOn()
+void subsystem_Intake::SetIntakeWheelsOn()
 {
     m_intakeMotor.Set(ControlMode::PercentOutput, 1);
 }
 
-void subsystem_Intake::SetIntakeRollersOff()
+
+void subsystem_Intake::SetIntakeWheelsOff()
 {
     m_intakeMotor.Set(ControlMode::PercentOutput, 0);
 }
 
+void subsystem_Intake::SetIndexerOn(double leftPower, double rightPower)
+{
+    m_leftIndexerMotor.Set(ControlMode::PercentOutput, leftPower);
+    m_rightIndexerMotor.Set(ControlMode::PercentOutput, rightPower);
+}
 
+void subsystem_Intake::SetIndexerOff()
+{
+    m_leftIndexerMotor.Set(ControlMode::PercentOutput, 0);
+    m_rightIndexerMotor.Set(ControlMode::PercentOutput, 0);
+}
 
 // This method will be called once per scheduler run
 void subsystem_Intake::Periodic() {}

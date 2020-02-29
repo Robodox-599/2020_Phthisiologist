@@ -21,7 +21,7 @@
 class command_DriveByDistance
     : public frc2::CommandHelper<frc2::CommandBase, command_DriveByDistance> {
  public:
-  command_DriveByDistance(int inches);
+  command_DriveByDistance(subsystem_Drive *theDrive, int inches);
 
   void Initialize() override;
 
@@ -33,5 +33,5 @@ class command_DriveByDistance
 
  private:
   subsystem_Drive *m_subsystem_Drive;
-  
+  int m_inches;
 };

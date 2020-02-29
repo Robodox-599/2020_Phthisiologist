@@ -28,11 +28,11 @@ class subsystem_Climb : public frc2::SubsystemBase {
   void Periodic();
 
  private:
-  TalonSRX m_LeftWinchMotor;
-  TalonSRX m_RightWinchMotor;
-  TalonSRX m_SlideMotor;
-  TalonSRX m_ClimbArmMotor;
-  frc::DoubleSolenoid m_LockSolenoid;
+  TalonSRX m_leftWinchMotor;
+  TalonSRX m_rightWinchMotor;
+  TalonSRX m_slideMotor;
+  TalonSRX m_climbArmMotor;
+  frc::DoubleSolenoid m_lockSolenoid;
   bool m_isClimbLocked;
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
