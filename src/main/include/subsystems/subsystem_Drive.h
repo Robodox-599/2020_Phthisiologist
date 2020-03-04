@@ -19,6 +19,7 @@ class subsystem_Drive : public frc2::SubsystemBase {
   void JoystickVelocityDrive(double x, double y);
   void JoystickPowerDrive(double x, double y);
   void DriveDistance(int inches);
+  double GetPIDError(int inches);
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.

@@ -19,10 +19,19 @@ void command_DriveByDistance::Initialize() {
 }
 
 // Called repeatedly when this Command is scheduled to run
-void command_DriveByDistance::Execute() {}
+void command_DriveByDistance::Execute() {
+  if (fabs(m_subsystem_Drive->GetPIDError(m_inches)) < m_errorWindow)
+  {
+    m_errorWindowCount++;
+  }
+  else
+  {
+    m_errorWindowCount = 0;
+  }
+}
 
 // Called once the command ends or is interrupted.
 void command_DriveByDistance::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool command_DriveByDistance::IsFinished() { return false; }
+bool command_DriveByDistance::IsFinished() { return m_errorWindowCount > m_errorWindowTargetCount; }

@@ -24,7 +24,7 @@ subsystem_Drive::subsystem_Drive() :
 
 void subsystem_Drive::SetPositionControl()
 {
-  double kP = 0.1, kI = 1e-4, kD = 1, kIz = 0, kFF = 0, kMaxOutput = 1, kMinOutput = -1;
+  double kP = 0.1, kI = 0, kD = 0, kIz = 0, kFF = 0, kMaxOutput = 1, kMinOutput = -1;
 
   m_leftPidController.SetP(kP);
   m_leftPidController.SetI(kI);
@@ -48,10 +48,15 @@ void subsystem_Drive::DriveDistance(int inches)
   m_rightPidController.SetReference(ConvertInchesToRotations(inches), rev::ControlType::kPosition);
 }
 
+double subsystem_Drive::GetPIDError(int inches)
+{
+  return m_leftEncoder.GetPosition() - ConvertInchesToRotations(inches);
+}
+
 int subsystem_Drive::ConvertInchesToRotations(int inches)
 {
   double wheelDiameter = 6;
-  double gearRatio = 1;
+  double gearRatio = 10.45;
 
   return ((inches)/(wheelDiameter*3.14))*gearRatio;
 }
