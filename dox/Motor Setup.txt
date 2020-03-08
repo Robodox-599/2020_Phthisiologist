@@ -1,0 +1,57 @@
+CAN ID = 1
+Position = Left Rear
+Direction = Reverse
+Encoder = 
+
+CAN ID = 2
+Position = Left Front
+Direction = Reverse
+Encoder = 
+
+CAN ID = 3
+Position = Right Front
+Direction = Forward
+Encoder = 
+
+CAN ID = 4
+Position = Right Rear
+Direction = Forward
+Encoder = 
+
+Intake
+TalonID = 4
+Direction = Reverse
+
+Feeder
+TalonID = 10
+Direction = Forward
+
+Hood
+TalonID = 3
+Direction = Reverse
+High Value = 439 (Hood Down)
+Low Value = 310 (Hood Up)
+
+Left Shooter
+Talon ID = 1
+Direction = Reverse
+
+Right Shooter
+Talon ID = 5
+Direction = Forward
+
+Traverse
+Talon ID = 6
+Direction = Right
+
+Left Winch
+Talon ID = 7
+Direction = Positive Up
+
+Right Winch
+Talon ID = 2
+Direction = Positive Up
+
+Arm
+Talon ID = 9
+Direction = Reverse (Positive Down)
