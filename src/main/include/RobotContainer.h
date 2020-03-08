@@ -16,6 +16,10 @@
 #include "subsystems/subsystem_Drive.h"
 #include "subsystems/subsystem_Intake.h"
 #include "subsystems/subsystem_Shooter.h"
+#include "subsystems/subsystem_AimBot.h"
+#include "frc/XboxController.h"
+#include "frc2/command/button/JoystickButton.h"
+#include "Constants.h"
 
 
 /**
@@ -37,8 +41,11 @@ class RobotContainer {
   subsystem_Drive m_drive;
   subsystem_Intake m_intake;
   subsystem_Shooter m_shooter;
+  subsystem_AimBot m_aimBot;
   placeHolder m_autonomousCommand;
   frc::Joystick m_mainController;
+
+  frc::XboxController xbox{ControllerConstants::xboxPort};
 
   void ConfigureButtonBindings();
 };
