@@ -13,13 +13,13 @@ subsystem_Drive::subsystem_Drive() :
   m_rearLeftMotor{DriveConstants::rearLeftMotorPort, rev::CANSparkMax::MotorType::kBrushless},
   m_rearRightMotor{DriveConstants::rearRightMotorPort, rev::CANSparkMax::MotorType::kBrushless}
 {
-  m_frontLeftMotor.SetInverted(false);
+  m_frontLeftMotor.SetInverted(true);
   m_frontRightMotor.SetInverted(true);
-  m_rearLeftMotor.SetInverted(false);
+  m_rearLeftMotor.SetInverted(true);
   m_rearRightMotor.SetInverted(true);
 
-  m_rearLeftMotor.Follow(m_frontLeftMotor);
-  m_rearRightMotor.Follow(m_frontRightMotor);
+  // m_rearLeftMotor.Follow(m_frontLeftMotor);
+  // m_rearRightMotor.Follow(m_frontRightMotor);
 }
 
 void subsystem_Drive::SetPositionControl()
@@ -67,7 +67,7 @@ void subsystem_Drive::JoystickPowerDrive(double x, double y)
   double r;
   if (y > 0.2)
   {
-    y = (y - 0.2  ) * 1 / .8;
+    y = (y - 0.2) * 1 / .8;
   }
   else if (y < -0.2)
   {
@@ -90,13 +90,13 @@ void subsystem_Drive::JoystickPowerDrive(double x, double y)
     x = 0;
   }
 
-  l = -y - x;
-  r = -y + x;
+  l = -y + x;
+  r = -y - x;
 
-  m_frontLeftMotor.Set(r);
-  m_rearLeftMotor.Set(r);
-  m_frontRightMotor.Set(l);
-  m_rearRightMotor.Set(l);
+  m_frontLeftMotor.Set(l);
+  m_rearLeftMotor.Set(l);
+  m_frontRightMotor.Set(r);
+  m_rearRightMotor.Set(r);
 }
 
 // This method will be called once per scheduler run

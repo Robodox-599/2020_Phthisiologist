@@ -6,11 +6,12 @@
 /*----------------------------------------------------------------------------*/
 
 #include "RobotContainer.h"
+#include "Constants.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand(), m_mainController{0} {
   // Initialize all of your commands and subsystems here
-  m_drive.SetDefaultCommand(command_DriveByJoystick(&m_drive, [this] {return m_mainController.GetRawAxis(1);},
-  [this] {return m_mainController.GetRawAxis(4);}));
+  m_drive.SetDefaultCommand(command_DriveByJoystick(&m_drive, [this] {return m_mainController.GetRawAxis(ControllerConstants::xboxLYAxis);},
+  [this] {return m_mainController.GetRawAxis(ControllerConstants::xboxRXAxis);}));
 
   // Configure the button bindings
   ConfigureButtonBindings();

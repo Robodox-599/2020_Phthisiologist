@@ -19,8 +19,8 @@
 
 namespace DriveConstants
 {
-    constexpr int frontLeftMotorPort = 1;
-    constexpr int rearLeftMotorPort = 2;
+    constexpr int frontLeftMotorPort = 2;
+    constexpr int rearLeftMotorPort = 1;
     constexpr int frontRightMotorPort = 3;
     constexpr int rearRightMotorPort = 4;
 

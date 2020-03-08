@@ -6,8 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/subsystem_Climb.h"
+#include "Constants.h"
 
-subsystem_Climb::subsystem_Climb() : m_leftWinchMotor(0), m_rightWinchMotor(0), m_slideMotor(0), m_climbArmMotor(0), m_lockSolenoid(0,0) {
+subsystem_Climb::subsystem_Climb() : m_leftWinchMotor(ClimbConstants::leftWinchMotorPort), m_rightWinchMotor(ClimbConstants::rightWinchMotorPort), m_slideMotor(ClimbConstants::antiTipMotorPort), m_climbArmMotor(ClimbConstants::armMotorPort), m_lockSolenoid(ClimbConstants::climbLockPistonL,ClimbConstants::climbLockPistonR) {
     m_leftWinchMotor.Set(ControlMode::PercentOutput, 0);
     m_rightWinchMotor.Set(ControlMode::PercentOutput, 0);
     m_rightWinchMotor.SetInverted(true);
