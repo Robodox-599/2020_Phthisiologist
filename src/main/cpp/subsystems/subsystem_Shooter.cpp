@@ -6,15 +6,14 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/subsystem_Shooter.h"
-#include "ctre/Phoenix.h"
-#include "frc/WPILib.h"
+#include "Constants.h"
 //dummy values
-subsystem_Shooter::subsystem_Shooter(): LeftMotor(0), RightMotor(1), HoodMotor(2) {
+subsystem_Shooter::subsystem_Shooter(): LeftMotor(ShooterConstants::leftShooterMotorPort), RightMotor(ShooterConstants::rightShooterMotorPort), HoodMotor(ShooterConstants::hoodAdjustHoodPort) {
 
     LeftMotor.SetInverted(true);
     RightMotor.SetInverted(false);
 
-    RightMotor.SetSensorPhase(false);
+    RightMotor.SetSensorPhase(true);
     
     RightMotor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 0);
     HoodMotor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 0);
@@ -22,25 +21,24 @@ subsystem_Shooter::subsystem_Shooter(): LeftMotor(0), RightMotor(1), HoodMotor(2
     RightMotor.SetSelectedSensorPosition(0, 0, 0);
     HoodMotor.SetSelectedSensorPosition(0, 0, 0);
 
-    LeftMotor.Set(ControlMode::Follower, 1);
+    // HoodMotor.Config_kD = 0; //dummy values
+    // HoodMotor.Config_kF = 1; //dummy values
+    // HoodMotor.Config_kI = 0; //dummy values
+    // HoodMotor.Config_kP = 0; //dummy values
+    // HoodMotor.Config_IntegralZone = 0; //dummy values
 
-    HoodMotor.Config_kD = 0; //dummy values
-    HoodMotor.Config_kF = 1; //dummy values
-    HoodMotor.Config_kI = 0; //dummy values
-    HoodMotor.Config_kP = 0; //dummy values
-    HoodMotor.Config_IntegralZone = 0; //dummy values
-
-    RightMotor.Config_kD = 0; //dummy values
-    RightMotor.Config_kF = 1; //dummy values
-    RightMotor.Config_kI = 0; //dummy values
-    RightMotor.Config_kP = 0; //dummy values
-    RightMotor.Config_IntegralZone = 0; //dummy values
+    RightMotor.Config_kD(0, 1, 0); //dummy values
+    RightMotor.Config_kF(0, 0.0165, 0); //dummy values
+    RightMotor.Config_kI(0, 0, 0); //dummy values
+    RightMotor.Config_kP(0, 0.12, 0); //dummy values
+    // RightMotor.Config_IntegralZone = 0; //dummy values
 
 }
 
 void subsystem_Shooter::FlywheelSpin(double velocity)
 {
     RightMotor.Set(ControlMode::Velocity, velocity);
+    LeftMotor.Set(ControlMode::Follower, ShooterConstants::rightShooterMotorPort);
 }
 
 void subsystem_Shooter::HoodMovement(double position)

@@ -8,7 +8,7 @@
 #include "subsystems/subsystem_Intake.h"
 #include "Constants.h"
 
-subsystem_Intake::subsystem_Intake() : m_intakeMotor(IntakeConstants::intakeMotorPort), m_leftIndexerMotor(ConveyorConstants::bottomConveyorMotorPort), m_rightIndexerMotor(ConveyorConstants::topConveyorMotorPort), m_intakePiston(IntakeConstants::intakePistonL,IntakeConstants::intakePistonR)
+subsystem_Intake::subsystem_Intake() : m_intakeMotor(IntakeConstants::intakeMotorPort), m_leftIndexerMotor(IntakeConstants::leftIndexerMotorPort), m_rightIndexerMotor(IntakeConstants::rightIndexerMotorPort), m_intakePiston(IntakeConstants::intakePistonL,IntakeConstants::intakePistonR)
 {
     m_intakeMotor.Set(ControlMode::PercentOutput, 0);
     m_leftIndexerMotor.Set(ControlMode::PercentOutput, 0);

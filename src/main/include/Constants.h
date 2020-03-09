@@ -57,7 +57,7 @@ namespace ControllerConstants
 
 namespace ClimbConstants
 {
-    constexpr int leftWinchMotorPort = 5;
+    constexpr int leftWinchMotorPort = 10;
     constexpr int rightWinchMotorPort = 6;
     constexpr int armMotorPort = 7;
     constexpr int antiTipMotorPort = 8;
@@ -68,9 +68,11 @@ namespace ClimbConstants
 
 namespace ShooterConstants
 {
-    constexpr int leftShooterMotorPort = 9;
-    constexpr int rightShooterMotorPort = 10;
-    constexpr int shooterEncoderPort = 10;
+    constexpr int leftShooterMotorPort = 11;
+    constexpr int rightShooterMotorPort = 5;
+    constexpr int shooterEncoderPort = 5;
+
+    constexpr int feederMotorPort = 13;
     
     constexpr int hoodAdjustHoodPort = 11;
     constexpr int hoodPotentiometerPort = 11;
@@ -79,13 +81,10 @@ namespace ShooterConstants
 namespace IntakeConstants
 {
     constexpr int intakeMotorPort = 12;
+
+    constexpr int leftIndexerMotorPort = 13;
+    constexpr int rightIndexerMotorPort = 14;
     
     constexpr int intakePistonL = 0;
     constexpr int intakePistonR = 1;
-}
-
-namespace ConveyorConstants
-{
-    constexpr int topConveyorMotorPort = 13;
-    constexpr int bottomConveyorMotorPort = 14;
 }
