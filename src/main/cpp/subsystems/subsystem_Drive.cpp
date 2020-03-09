@@ -99,6 +99,7 @@ void subsystem_Drive::JoystickPowerDrive(double x, double y)
   m_rearRightMotor.Set(l);
 }
 
+<<<<<<< HEAD
 
   void subsystem_Drive::VelocityDrive(double x, double y)
 {
@@ -170,6 +171,8 @@ void subsystem_Drive::JoystickPowerDrive(double x, double y)
 }
 
 // This method will be called once per scheduler run
+=======
+>>>>>>> MergeIt
 void subsystem_Drive::Periodic() {}
 
 
