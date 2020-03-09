@@ -72,10 +72,24 @@ namespace ShooterConstants
     constexpr int rightShooterMotorPort = 5;
     constexpr int shooterEncoderPort = 5;
 
+    constexpr double shooterkF = 0.0165;
+    constexpr double shooterkP = 0.12;
+    constexpr double shooterkD = 1;
+
     constexpr int feederMotorPort = 13;
     
     constexpr int hoodAdjustHoodPort = 11;
     constexpr int hoodPotentiometerPort = 11;
+
+    constexpr double hoodPotMax = 444;
+    constexpr double hoodPotMin = 314;
+    constexpr double hoodPotLimitPercent = 10;
+    constexpr double hoodTotalDegrees = 37;
+
+    constexpr double hoodkF = 0;
+    constexpr double hoodkP = 0;
+    constexpr double hoodkI = 0;
+    constexpr double hoodkD = 0;
 }
 
 namespace IntakeConstants

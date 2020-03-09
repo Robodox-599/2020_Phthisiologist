@@ -9,6 +9,9 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include "subsystems/subsystem_AimBot.h"
+#include "subsystems/subsystem_Drive.h"
+#include "frc/Timer.h"
 
 /**
  * An example command.
@@ -17,10 +20,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class placeHolder
-    : public frc2::CommandHelper<frc2::CommandBase, placeHolder> {
+class command_AimBotAutoAim
+    : public frc2::CommandHelper<frc2::CommandBase, command_AimBotAutoAim> {
  public:
-  placeHolder();
+  command_AimBotAutoAim(subsystem_AimBot* aimBot, subsystem_Drive* drive);
 
   void Initialize() override;
 
@@ -29,4 +32,17 @@ class placeHolder
   void End(bool interrupted) override;
 
   bool IsFinished() override;
+private:
+  frc::Timer timer;
+  subsystem_AimBot* m_aimBot;
+  subsystem_Drive* m_drive;
+  double m_yaw;
+  double m_power;
+  double m_kF;
+  double m_kP;
+  double m_kI;
+  double i;
+  double prevPosition;
+  double nextPosition;
+  bool linedUp;
 };

@@ -8,31 +8,40 @@
 #include "subsystems/subsystem_Shooter.h"
 #include "Constants.h"
 //dummy values
-subsystem_Shooter::subsystem_Shooter(): LeftMotor(ShooterConstants::leftShooterMotorPort), RightMotor(ShooterConstants::rightShooterMotorPort), HoodMotor(ShooterConstants::hoodAdjustHoodPort) {
+subsystem_Shooter::subsystem_Shooter(): LeftMotor(ShooterConstants::leftShooterMotorPort), RightMotor(ShooterConstants::rightShooterMotorPort), HoodMotor(ShooterConstants::hoodAdjustHoodPort), FeederMotor(ShooterConstants::feederMotorPort)
+{
 
     LeftMotor.SetInverted(true);
     RightMotor.SetInverted(false);
+    FeederMotor.SetInverted(false);
+    HoodMotor.SetInverted(false);
 
     RightMotor.SetSensorPhase(true);
     
     RightMotor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 0);
-    HoodMotor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 0);
 
     RightMotor.SetSelectedSensorPosition(0, 0, 0);
+
+    RightMotor.Config_kF(0, ShooterConstants::shooterkF, 0);
+    RightMotor.Config_kP(0, ShooterConstants::shooterkP, 0);
+    RightMotor.Config_kD(0, ShooterConstants::shooterkD, 0);
+
+
     HoodMotor.SetSelectedSensorPosition(0, 0, 0);
+    HoodMotor.ConfigSelectedFeedbackSensor(FeedbackDevice::Analog, 0, 0);
 
-    // HoodMotor.Config_kD = 0; //dummy values
-    // HoodMotor.Config_kF = 1; //dummy values
-    // HoodMotor.Config_kI = 0; //dummy values
-    // HoodMotor.Config_kP = 0; //dummy values
-    // HoodMotor.Config_IntegralZone = 0; //dummy values
+    hoodLimitOffset = (ShooterConstants::hoodPotMax - ShooterConstants::hoodPotMin) * (ShooterConstants::hoodPotLimitPercent/100);
+    hoodLimitMax = ShooterConstants::hoodPotMax - hoodLimitOffset;
+    hoodLimitMin = ShooterConstants::hoodPotMin + hoodLimitOffset;
+    HoodMotor.ConfigForwardSoftLimitThreshold(hoodLimitMax);
+    HoodMotor.ConfigReverseSoftLimitThreshold(hoodLimitMin);
+    HoodMotor.ConfigForwardSoftLimitEnable(true);
+    HoodMotor.ConfigReverseSoftLimitEnable(true);
 
-    RightMotor.Config_kD(0, 1, 0); //dummy values
-    RightMotor.Config_kF(0, 0.0165, 0); //dummy values
-    RightMotor.Config_kI(0, 0, 0); //dummy values
-    RightMotor.Config_kP(0, 0.12, 0); //dummy values
-    // RightMotor.Config_IntegralZone = 0; //dummy values
-
+    HoodMotor.Config_kF(0, ShooterConstants::hoodkF, 0);
+    HoodMotor.Config_kP(0, ShooterConstants::hoodkP, 0);
+    HoodMotor.Config_kI(0, ShooterConstants::hoodkI, 0);
+    HoodMotor.Config_kD(0, ShooterConstants::hoodkD, 0);
 }
 
 void subsystem_Shooter::FlywheelSpin(double velocity)
@@ -41,9 +50,10 @@ void subsystem_Shooter::FlywheelSpin(double velocity)
     LeftMotor.Set(ControlMode::Follower, ShooterConstants::rightShooterMotorPort);
 }
 
-void subsystem_Shooter::HoodMovement(double position)
+void subsystem_Shooter::HoodMovement(double degrees)
 {
-    HoodMotor.Set(ControlMode::Position, position);
+    double ticks = degrees*((ShooterConstants::hoodPotMax-ShooterConstants::hoodPotMin)/ShooterConstants::hoodTotalDegrees);
+    HoodMotor.Set(ControlMode::MotionMagic, ticks);
 }
 
 // This method will be called once per scheduler run

@@ -9,7 +9,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-#include "subsystems/subsystem_AimBot.h"
+#include "subsystems/subsystem_Shooter.h"
 
 /**
  * An example command.
@@ -18,10 +18,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class AimBotCameraMode
-    : public frc2::CommandHelper<frc2::CommandBase, AimBotCameraMode> {
+class command_ShooterShoot
+    : public frc2::CommandHelper<frc2::CommandBase, command_ShooterShoot> {
  public:
-  AimBotCameraMode(subsystem_AimBot* aimBot);
+  command_ShooterShoot(subsystem_Shooter* shooter, std::function<double()> velocity);
 
   void Initialize() override;
 
@@ -30,7 +30,7 @@ class AimBotCameraMode
   void End(bool interrupted) override;
 
   bool IsFinished() override;
-
-  private:
-  subsystem_AimBot m_subsystem;
+private:
+  subsystem_Shooter* m_shooterSubsystem;
+  std::function <double()> m_velocity;
 };

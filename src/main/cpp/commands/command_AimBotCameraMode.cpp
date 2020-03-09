@@ -5,21 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/AimBotCameraMode.h"
+#include "commands/command_AimBotCameraMode.h"
 
-AimBotCameraMode::AimBotCameraMode(subsystem_AimBot* aimBot) {
+command_AimBotCameraMode::command_AimBotCameraMode(subsystem_AimBot* aimBot) {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({aimBot});
 }
 
 // Called when the command is initially scheduled.
-void AimBotCameraMode::Initialize() {m_subsystem.ConvertMode();}
+void command_AimBotCameraMode::Initialize() {m_subsystem.ConvertMode();}
 
 // Called repeatedly when this Command is scheduled to run
-void AimBotCameraMode::Execute() {}
+void command_AimBotCameraMode::Execute() {}
 
 // Called once the command ends or is interrupted.
-void AimBotCameraMode::End(bool interrupted) {}
+void command_AimBotCameraMode::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool AimBotCameraMode::IsFinished() { return true; }
+bool command_AimBotCameraMode::IsFinished() { return true; }

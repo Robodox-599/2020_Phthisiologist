@@ -5,21 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/AimBotDefault.h"
+#include "commands/command_ShooterShoot.h"
 
-AimBotDefault::AimBotDefault(subsystem_AimBot* aimbBot) {
+command_ShooterShoot::command_ShooterShoot(subsystem_Shooter* shooter, std::function<double()> velocity): m_shooterSubsystem{shooter}, m_velocity{velocity} {
   // Use addRequirements() here to declare subsystem dependencies.
-  AddRequirements({aimbBot});
+  AddRequirements({m_shooterSubsystem});
 }
 
 // Called when the command is initially scheduled.
-void AimBotDefault::Initialize() {}
+void command_ShooterShoot::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void AimBotDefault::Execute() {m_subsystem.AimBotYaw();}
+void command_ShooterShoot::Execute() {m_shooterSubsystem->FlywheelSpin(m_velocity());}
 
 // Called once the command ends or is interrupted.
-void AimBotDefault::End(bool interrupted) {}
+void command_ShooterShoot::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool AimBotDefault::IsFinished() { return false; }
+bool command_ShooterShoot::IsFinished() { return false; }
