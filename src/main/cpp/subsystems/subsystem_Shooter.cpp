@@ -28,15 +28,8 @@ subsystem_Shooter::subsystem_Shooter(): LeftMotor(ShooterConstants::leftShooterM
 
 
     HoodMotor.ConfigSelectedFeedbackSensor(FeedbackDevice::Analog, 0, 0);
-    HoodMotor.SetSelectedSensorPosition(0, 0, 0);
 
     HoodMotor.SetSensorPhase(false);
-
-    hoodLimitOffset = 125 * (ShooterConstants::hoodPotLimitPercent/100);
-    HoodMotor.ConfigForwardSoftLimitThreshold((ShooterConstants::hoodPotMax - ShooterConstants::hoodPotMin)-hoodLimitOffset-1);
-    HoodMotor.ConfigReverseSoftLimitThreshold(hoodLimitOffset+1);
-    HoodMotor.ConfigForwardSoftLimitEnable(false);
-    HoodMotor.ConfigReverseSoftLimitEnable(false);
 
     HoodMotor.Config_kF(0, ShooterConstants::hoodkF, 0);
     HoodMotor.Config_kP(0, ShooterConstants::hoodkP, 0);
@@ -58,15 +51,9 @@ double subsystem_Shooter::ReturnFlywheelVelocity()
     return RightMotor.GetSelectedSensorVelocity();
 }
 
-void subsystem_Shooter::HoodMovement(double degrees)
+void subsystem_Shooter::HoodMovement(double ticks)
 {
-    //double ticks = (degrees*((ShooterConstants::hoodPotMax-ShooterConstants::hoodPotMin)/ShooterConstants::hoodTotalDegrees));
-    HoodMotor.Set(ControlMode::MotionMagic, degrees+1);
-}
-
-double subsystem_Shooter::HoodTarget(double degrees)
-{
-    return degrees;//(degrees*((ShooterConstants::hoodPotMax-ShooterConstants::hoodPotMin)/ShooterConstants::hoodTotalDegrees)+1);
+    HoodMotor.Set(ControlMode::MotionMagic, ticks);
 }
 
 double subsystem_Shooter::ReturnHoodTicks()

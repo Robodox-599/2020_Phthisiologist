@@ -18,15 +18,7 @@ void command_ShooterHoodandShoot::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void command_ShooterHoodandShoot::Execute() 
 {
-  m_shooterSubsystem->HoodMovement(m_degrees()*37);
-  m_shooterSubsystem->FlywheelSpin(30000);
-  if(m_shooterSubsystem->ReturnHoodTicks() < m_shooterSubsystem->HoodTarget(m_degrees()*37) + 2 && m_shooterSubsystem->ReturnHoodTicks() > m_shooterSubsystem->HoodTarget(m_degrees()*37) - 2)
-  {
-    if(m_shooterSubsystem->ReturnFlywheelVelocity > 28000)
-    {
-      m_shooterSubsystem->Feed();
-    }
-  }
+ 
 }
 
 // Called once the command ends or is interrupted.
