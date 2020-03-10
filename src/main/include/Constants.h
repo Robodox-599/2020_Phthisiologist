@@ -62,8 +62,8 @@ namespace ClimbConstants
     constexpr int armMotorPort = 9;
     constexpr int antiTipMotorPort = 6;
     
-    constexpr int climbLockPistonL = 6;
-    constexpr int climbLockPistonR = 7;
+    constexpr int climbLockPiston1 = 6;
+    constexpr int climbLockPiston2 = 7;
 }
 
 namespace ShooterConstants
@@ -96,8 +96,8 @@ namespace IntakeConstants
 {
     constexpr int intakeMotorPort = 14;
     
-    constexpr int intakePistonL = 0;
-    constexpr int intakePistonR = 1;
+    constexpr int intakePiston1 = 0;
+    constexpr int intakePiston2 = 1;
     
     constexpr int leftIndexerMotorPort  = 15;
     constexpr int rightIndexerMotorPort  = 16;

@@ -7,7 +7,9 @@
 
 #include "subsystems/subsystem_Intake.h"
 
-subsystem_Intake::subsystem_Intake() : m_intakeMotor(0), m_leftIndexerMotor(0), m_rightIndexerMotor(0), m_intakePiston(0,0)
+subsystem_Intake::subsystem_Intake()
+: m_intakeMotor(IntakeConstants::intakeMotorPort), m_leftIndexerMotor(IntakeConstants::leftIndexerMotorPort),
+m_rightIndexerMotor(IntakeConstants::rightIndexerMotorPort), m_intakePiston(IntakeConstants::intakePiston1,IntakeConstants::intakePiston2)
 {
     m_intakeMotor.Set(ControlMode::PercentOutput, 0);
     m_leftIndexerMotor.Set(ControlMode::PercentOutput, 0);

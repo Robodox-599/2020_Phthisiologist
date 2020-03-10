@@ -10,6 +10,7 @@
 #include <frc2/command/SubsystemBase.h>
 #include "ctre/Phoenix.h"
 #include "frc/DoubleSolenoid.h"
+#include "Constants.h"
 
 class subsystem_Intake : public frc2::SubsystemBase {
  public:
