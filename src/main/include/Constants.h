@@ -57,13 +57,13 @@ namespace ControllerConstants
 
 namespace ClimbConstants
 {
-    constexpr int leftWinchMotorPort = 10;
-    constexpr int rightWinchMotorPort = 6;
-    constexpr int armMotorPort = 7;
-    constexpr int antiTipMotorPort = 8;
+    constexpr int leftWinchMotorPort = 7;
+    constexpr int rightWinchMotorPort = 12;
+    constexpr int armMotorPort = 9;
+    constexpr int antiTipMotorPort = 6;
     
-    constexpr int climbLockPistonL = 2;
-    constexpr int climbLockPistonR = 3;
+    constexpr int climbLockPistonL = 6;
+    constexpr int climbLockPistonR = 7;
 }
 
 namespace ShooterConstants
@@ -71,34 +71,36 @@ namespace ShooterConstants
     constexpr int leftShooterMotorPort = 11;
     constexpr int rightShooterMotorPort = 5;
     constexpr int shooterEncoderPort = 5;
-
+    
     constexpr double shooterkF = 0.0165;
     constexpr double shooterkP = 0.12;
     constexpr double shooterkD = 1;
 
-    constexpr int feederMotorPort = 13;
-    
-    constexpr int hoodAdjustHoodPort = 11;
-    constexpr int hoodPotentiometerPort = 11;
+    constexpr int feederMotorPort = 10;
 
-    constexpr double hoodPotMax = 444;
-    constexpr double hoodPotMin = 314;
-    constexpr double hoodPotLimitPercent = 10;
+    constexpr int hoodAdjustHoodPort = 13;
+    constexpr int hoodPotentiometerPort = 13;
+
+    constexpr double hoodPotMin = -423;
+    constexpr double hoodPotMax = -301;
+    constexpr double hoodPotLimitPercent = 2;
     constexpr double hoodTotalDegrees = 37;
 
     constexpr double hoodkF = 0;
-    constexpr double hoodkP = 0;
+    constexpr double hoodkP = 35;
     constexpr double hoodkI = 0;
     constexpr double hoodkD = 0;
+    constexpr int hoodVelocity = 280;
+    constexpr int hoodAcceleration = 100;
 }
 
 namespace IntakeConstants
 {
-    constexpr int intakeMotorPort = 12;
-
-    constexpr int leftIndexerMotorPort = 13;
-    constexpr int rightIndexerMotorPort = 14;
+    constexpr int intakeMotorPort = 14;
     
     constexpr int intakePistonL = 0;
     constexpr int intakePistonR = 1;
+    
+    constexpr int leftIndexerMotorPort  = 15;
+    constexpr int rightIndexerMotorPort  = 16;
 }

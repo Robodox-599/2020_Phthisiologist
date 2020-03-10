@@ -58,7 +58,7 @@ void command_AimBotAutoAim::Execute()
   }
   printf("i gain: %f \n", i);
   printf("next position value: %f \n", nextPosition);
-  m_drive->JoystickPercentDrive(m_power, 0);
+  m_drive->JoystickPowerDrive(m_power, 0);
   if(nextPosition < 0.5 && nextPosition > -0.5)
   {
     i = 0;
@@ -79,7 +79,7 @@ void command_AimBotAutoAim::Execute()
 }
 
 // Called once the command ends or is interrupted.
-void command_AimBotAutoAim::End(bool interrupted) {m_drive->JoystickPercentDrive(0, 0); printf("aim locked");}
+void command_AimBotAutoAim::End(bool interrupted) {m_drive->JoystickPowerDrive(0, 0); printf("aim locked");}
 
 // Returns true when the command should end.
 bool command_AimBotAutoAim::IsFinished() { return linedUp; }

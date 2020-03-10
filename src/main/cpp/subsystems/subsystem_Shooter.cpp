@@ -14,9 +14,9 @@ subsystem_Shooter::subsystem_Shooter(): LeftMotor(ShooterConstants::leftShooterM
     LeftMotor.SetInverted(true);
     RightMotor.SetInverted(false);
     FeederMotor.SetInverted(false);
-    HoodMotor.SetInverted(false);
+    HoodMotor.SetInverted(true);
 
-    RightMotor.SetSensorPhase(true);
+    RightMotor.SetSensorPhase(false);
     
     RightMotor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 0);
 
@@ -27,21 +27,24 @@ subsystem_Shooter::subsystem_Shooter(): LeftMotor(ShooterConstants::leftShooterM
     RightMotor.Config_kD(0, ShooterConstants::shooterkD, 0);
 
 
-    HoodMotor.SetSelectedSensorPosition(0, 0, 0);
     HoodMotor.ConfigSelectedFeedbackSensor(FeedbackDevice::Analog, 0, 0);
+    HoodMotor.SetSelectedSensorPosition(0, 0, 0);
 
-    hoodLimitOffset = (ShooterConstants::hoodPotMax - ShooterConstants::hoodPotMin) * (ShooterConstants::hoodPotLimitPercent/100);
-    hoodLimitMax = ShooterConstants::hoodPotMax - hoodLimitOffset;
-    hoodLimitMin = ShooterConstants::hoodPotMin + hoodLimitOffset;
-    HoodMotor.ConfigForwardSoftLimitThreshold(hoodLimitMax);
-    HoodMotor.ConfigReverseSoftLimitThreshold(hoodLimitMin);
-    HoodMotor.ConfigForwardSoftLimitEnable(true);
-    HoodMotor.ConfigReverseSoftLimitEnable(true);
+    HoodMotor.SetSensorPhase(false);
+
+    hoodLimitOffset = 125 * (ShooterConstants::hoodPotLimitPercent/100);
+    HoodMotor.ConfigForwardSoftLimitThreshold((ShooterConstants::hoodPotMax - ShooterConstants::hoodPotMin)-hoodLimitOffset-1);
+    HoodMotor.ConfigReverseSoftLimitThreshold(hoodLimitOffset+1);
+    HoodMotor.ConfigForwardSoftLimitEnable(false);
+    HoodMotor.ConfigReverseSoftLimitEnable(false);
 
     HoodMotor.Config_kF(0, ShooterConstants::hoodkF, 0);
     HoodMotor.Config_kP(0, ShooterConstants::hoodkP, 0);
     HoodMotor.Config_kI(0, ShooterConstants::hoodkI, 0);
     HoodMotor.Config_kD(0, ShooterConstants::hoodkD, 0);
+
+    HoodMotor.ConfigMotionCruiseVelocity(ShooterConstants::hoodVelocity);
+    HoodMotor.ConfigMotionAcceleration(ShooterConstants::hoodAcceleration);
 }
 
 void subsystem_Shooter::FlywheelSpin(double velocity)
@@ -50,10 +53,30 @@ void subsystem_Shooter::FlywheelSpin(double velocity)
     LeftMotor.Set(ControlMode::Follower, ShooterConstants::rightShooterMotorPort);
 }
 
+double subsystem_Shooter::ReturnFlywheelVelocity()
+{
+    return RightMotor.GetSelectedSensorVelocity();
+}
+
 void subsystem_Shooter::HoodMovement(double degrees)
 {
-    double ticks = degrees*((ShooterConstants::hoodPotMax-ShooterConstants::hoodPotMin)/ShooterConstants::hoodTotalDegrees);
-    HoodMotor.Set(ControlMode::MotionMagic, ticks);
+    //double ticks = (degrees*((ShooterConstants::hoodPotMax-ShooterConstants::hoodPotMin)/ShooterConstants::hoodTotalDegrees));
+    HoodMotor.Set(ControlMode::MotionMagic, degrees+1);
+}
+
+double subsystem_Shooter::HoodTarget(double degrees)
+{
+    return degrees;//(degrees*((ShooterConstants::hoodPotMax-ShooterConstants::hoodPotMin)/ShooterConstants::hoodTotalDegrees)+1);
+}
+
+double subsystem_Shooter::ReturnHoodTicks()
+{
+    return HoodMotor.GetSelectedSensorPosition();
+}
+
+void subsystem_Shooter::Feed()
+{
+    FeederMotor.Set(ControlMode::PercentOutput, 0.8);
 }
 
 // This method will be called once per scheduler run
