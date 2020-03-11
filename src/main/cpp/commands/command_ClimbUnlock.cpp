@@ -5,25 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/command_ClimbArmByPower.h"
+#include "commands/command_ClimbUnlock.h"
 
-command_ClimbArmByPower::command_ClimbArmByPower(subsystem_Climb *subsystem_Climb, std::function<double()> power)
-: m_subsystem_Climb{subsystem_Climb}, m_power{power}
+command_ClimbUnlock::command_ClimbUnlock(subsystem_Climb *subsystem_Climb)
+: m_subsystem_Climb{subsystem_Climb} 
 {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({m_subsystem_Climb});
 }
 
 // Called when the command is initially scheduled.
-void command_ClimbArmByPower::Initialize() {}
+void command_ClimbUnlock::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void command_ClimbArmByPower::Execute() {
-  m_subsystem_Climb->SetClimbArmMotorPower(m_power()/2);
+void command_ClimbUnlock::Execute() {
+  m_subsystem_Climb->UnlockClimb();
 }
 
 // Called once the command ends or is interrupted.
-void command_ClimbArmByPower::End(bool interrupted) {}
+void command_ClimbUnlock::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool command_ClimbArmByPower::IsFinished() { return false; }
+bool command_ClimbUnlock::IsFinished() { return true; }

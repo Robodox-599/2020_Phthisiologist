@@ -18,10 +18,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class command_ClimbArmByPower
-    : public frc2::CommandHelper<frc2::CommandBase, command_ClimbArmByPower> {
+class command_ClimbLock
+    : public frc2::CommandHelper<frc2::CommandBase, command_ClimbLock> {
  public:
-  command_ClimbArmByPower(subsystem_Climb *subsystem_Climb, std::function<double()> power);
+  command_ClimbLock(subsystem_Climb *subsystem_Climb);
 
   void Initialize() override;
 
@@ -33,5 +33,4 @@ class command_ClimbArmByPower
 
  private:
   subsystem_Climb *m_subsystem_Climb;
-  std::function<double()> m_power;
 };

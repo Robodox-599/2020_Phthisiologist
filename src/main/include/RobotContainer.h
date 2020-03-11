@@ -9,9 +9,15 @@
 
 #include <frc2/command/Command.h>
 #include <frc/Joystick.h>
+#include "frc2/command/button/JoystickButton.h"
 
 #include "commands/placeHolder.h"
 #include "commands/command_DriveByJoystick.h"
+#include "commands/command_ClimbArmByPower.h"
+#include "commands/command_ClimbWinchByPower.h"
+#include "commands/command_ClimbLock.h"
+#include "commands/command_ClimbUnlock.h"
+
 #include "subsystems/subsystem_Climb.h"
 #include "subsystems/subsystem_Drive.h"
 #include "subsystems/subsystem_Intake.h"
