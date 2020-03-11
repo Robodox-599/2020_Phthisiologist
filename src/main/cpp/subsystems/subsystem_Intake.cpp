@@ -13,6 +13,8 @@ subsystem_Intake::subsystem_Intake() : m_intakeMotor(IntakeConstants::intakeMoto
     m_intakeMotor.Set(ControlMode::PercentOutput, 0);
     m_leftIndexerMotor.Set(ControlMode::PercentOutput, 0);
     m_rightIndexerMotor.Set(ControlMode::PercentOutput, 0);
+    m_leftIndexerMotor.SetInverted(true);
+    m_rightIndexerMotor.SetInverted(false);
 }
 
 void subsystem_Intake::SetIntakeUp()
@@ -32,9 +34,9 @@ bool subsystem_Intake::IsIntakeDeployed()
     return m_isIntakeDeployed;
 }
 
-void subsystem_Intake::SetIntakeWheelsOn()
+void subsystem_Intake::SetIntakeWheelsOn(double power)
 {
-    m_intakeMotor.Set(ControlMode::PercentOutput, 1);
+    m_intakeMotor.Set(ControlMode::PercentOutput, power);
 }
 
 

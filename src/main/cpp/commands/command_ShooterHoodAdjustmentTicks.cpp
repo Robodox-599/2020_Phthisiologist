@@ -5,21 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/command_ShooterHoodAdjustment.h"
+#include "commands/command_ShooterHoodAdjustmentTicks.h"
 
-command_ShooterHoodAdjustment::command_ShooterHoodAdjustment(subsystem_Shooter* shooter, std::function<double()> degrees) : m_shooterSubsystem{shooter}, m_degrees{degrees} {
+command_ShooterHoodAdjustmentTicks::command_ShooterHoodAdjustmentTicks(subsystem_Shooter* shooter, std::function<double()> ticks) : m_shooterSubsystem{shooter}, m_ticks{ticks} {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({shooter});
 }
 
 // Called when the command is initially scheduled.
-void command_ShooterHoodAdjustment::Initialize() {}
+void command_ShooterHoodAdjustmentTicks::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void command_ShooterHoodAdjustment::Execute() {m_shooterSubsystem->HoodMovement(m_degrees());}
+void command_ShooterHoodAdjustmentTicks::Execute() {m_shooterSubsystem->HoodMovementByTicks(m_ticks());}
 
 // Called once the command ends or is interrupted.
-void command_ShooterHoodAdjustment::End(bool interrupted) {}
+void command_ShooterHoodAdjustmentTicks::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool command_ShooterHoodAdjustment::IsFinished() { return false; }
+bool command_ShooterHoodAdjustmentTicks::IsFinished() { return false; }

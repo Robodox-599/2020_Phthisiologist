@@ -15,9 +15,10 @@ class subsystem_Shooter : public frc2::SubsystemBase {
   subsystem_Shooter();
   void FlywheelSpin(double velocity);
   double ReturnFlywheelVelocity();
-  void HoodMovement(double ticks);
+  void HoodMovementByTicks(double ticks);
+  void HoodMovementByDegrees(double degrees);
   double ReturnHoodTicks();
-  void Feed();
+  void Feed(double power);
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.
@@ -31,6 +32,10 @@ class subsystem_Shooter : public frc2::SubsystemBase {
   TalonSRX HoodMotor;
   TalonSRX FeederMotor;
   double hoodLimitOffset;
+  double hoodLimitMax;
+  double hoodLimitMin;
+  double hoodPotRange;
+
 
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.

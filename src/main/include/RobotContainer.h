@@ -43,7 +43,7 @@ class RobotContainer {
   subsystem_Shooter m_shooter;
   subsystem_AimBot m_aimBot;
   placeHolder m_autonomousCommand;
-  frc::Joystick atk3{1};
+  frc::Joystick atk3{ControllerConstants::joystickPort};
 
   frc::XboxController xbox{ControllerConstants::xboxPort};
 

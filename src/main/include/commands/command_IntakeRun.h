@@ -9,7 +9,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-#include "subsystems/subsystem_Shooter.h"
+#include "subsystems/subsystem_Intake.h"
 
 /**
  * An example command.
@@ -18,10 +18,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class command_ShooterHoodAdjustment
-    : public frc2::CommandHelper<frc2::CommandBase, command_ShooterHoodAdjustment> {
+class command_IntakeRun
+    : public frc2::CommandHelper<frc2::CommandBase, command_IntakeRun> {
  public:
-  command_ShooterHoodAdjustment(subsystem_Shooter* shooter, std::function <double()> degrees);
+  command_IntakeRun(subsystem_Intake* intake, std::function<double()> power);
 
   void Initialize() override;
 
@@ -30,7 +30,8 @@ class command_ShooterHoodAdjustment
   void End(bool interrupted) override;
 
   bool IsFinished() override;
+
 private:
-  subsystem_Shooter* m_shooterSubsystem;
-  std::function <double()> m_degrees;
+  subsystem_Intake* m_intake;
+  std::function<double()> m_power;
 };

@@ -18,6 +18,8 @@ subsystem_Climb::subsystem_Climb() : m_leftWinchMotor(ClimbConstants::leftWinchM
     m_slideMotor.Set(ControlMode::PercentOutput, 0);
 
     m_climbArmMotor.Set(ControlMode::PercentOutput, 0);
+    m_climbArmMotor.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, 0, 0);
+    m_climbArmMotor.SetSelectedSensorPosition(0, 0, 0);
 }
 
 void subsystem_Climb::SetWinchMotorPower(double power)
