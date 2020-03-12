@@ -17,6 +17,7 @@
 #include "commands/command_ClimbWinchByPower.h"
 #include "commands/command_ClimbLock.h"
 #include "commands/command_ClimbUnlock.h"
+#include "commands/command_ClimbArmByPosition.h"
 
 #include "subsystems/subsystem_Climb.h"
 #include "subsystems/subsystem_Drive.h"

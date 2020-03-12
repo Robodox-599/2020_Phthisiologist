@@ -12,7 +12,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(), m_mainController{0} {
   // m_drive.SetDefaultCommand(command_DriveByJoystick(&m_drive, [this] {return m_mainController.GetRawAxis(4);},
   // [this] {return m_mainController.GetRawAxis(1);}));
 
-  m_climb.SetDefaultCommand(command_ClimbArmByPower(&m_climb, [this] {return m_mainController.GetRawAxis(4);}));
+  // m_climb.SetDefaultCommand(command_ClimbArmByPower(&m_climb, [this] {return m_mainController.GetRawAxis(4);}));
 
   // Configure the button bindings
   ConfigureButtonBindings();
@@ -25,6 +25,9 @@ void RobotContainer::ConfigureButtonBindings() {
 
   frc2::JoystickButton xboxB(&m_mainController, ControllerConstants::xboxB);
   xboxA.WhenPressed(command_ClimbUnlock(&m_climb));
+
+  frc2::JoystickButton xboxX(&m_mainController, ControllerConstants::xboxX);
+  xboxX.WhenPressed(command_ClimbArmByPosition(&m_climb, (ClimbConstants::climbArmEncoderMax-ClimbConstants::climbArmEncoderMin)/2));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {

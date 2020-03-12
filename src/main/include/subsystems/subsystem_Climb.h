@@ -11,6 +11,7 @@
 #include "ctre/Phoenix.h"
 #include "frc/DoubleSolenoid.h"
 #include "Constants.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 class subsystem_Climb : public frc2::SubsystemBase {
  public:
@@ -22,6 +23,9 @@ class subsystem_Climb : public frc2::SubsystemBase {
   bool IsClimbLocked();
   void SetSlideMotorPower(double power);
   void SetClimbArmMotorPower(double power);
+  void ClimbArmMovementByTicks(double ticks);
+  void ClimbArmMovementByDegrees(double degrees);
+  double ReturnClimbArmTicks();
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.
@@ -37,4 +41,9 @@ class subsystem_Climb : public frc2::SubsystemBase {
   TalonSRX m_climbArmMotor;
   frc::DoubleSolenoid m_lockSolenoid;
   bool m_isClimbLocked;
+  int m_climbArmEncoderRange;
+  int m_climbArmLimitOffset;
+  int m_climbArmLimitMax;
+  int m_climbArmLimitMin;
+  
 };
