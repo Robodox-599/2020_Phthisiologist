@@ -18,7 +18,7 @@ class subsystem_Intake : public frc2::SubsystemBase {
   void SetIntakeUp();
   void SetIntakeDown();
   bool IsIntakeDeployed();
-  void SetIntakeWheelsOn(double power);
+  void SetIntakeWheelsOn(double positivePower, double negativePower);
   void SetIntakeWheelsOff();
   void SetIndexerOn(double leftPower, double rightPower);
   void SetIndexerOff();

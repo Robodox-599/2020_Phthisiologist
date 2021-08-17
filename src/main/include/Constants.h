@@ -81,8 +81,8 @@ namespace ShooterConstants
     constexpr int hoodAdjustHoodPort = 13;
     constexpr int hoodPotentiometerPort = 13;
 
-    constexpr double hoodPotMin = 331;
-    constexpr double hoodPotMax = 461;
+    constexpr double hoodPotMin = 316;
+    constexpr double hoodPotMax = 447;
     constexpr double hoodPotLimitPercent = 2;
     constexpr double hoodTotalDegrees = 37;
 

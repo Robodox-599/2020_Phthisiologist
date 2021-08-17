@@ -10,6 +10,7 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 #include "subsystems/subsystem_Intake.h"
+#include "subsystems/subsystem_Shooter.h"
 
 /**
  * An example command.
@@ -18,10 +19,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class command_IntakeRunIndexer
-    : public frc2::CommandHelper<frc2::CommandBase, command_IntakeRunIndexer> {
+class command_IntakeMode
+    : public frc2::CommandHelper<frc2::CommandBase, command_IntakeMode> {
  public:
-  command_IntakeRunIndexer(subsystem_Intake* intake, std::function<double()> left, std::function<double()> right);
+  command_IntakeMode(subsystem_Intake* intake, subsystem_Shooter* shooter);
 
   void Initialize() override;
 
@@ -33,6 +34,4 @@ class command_IntakeRunIndexer
 
 private:
   subsystem_Intake* m_intake;
-  std::function<double()> m_left;
-  std::function<double()> m_right;
 };

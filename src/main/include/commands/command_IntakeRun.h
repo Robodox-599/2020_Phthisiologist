@@ -21,7 +21,7 @@
 class command_IntakeRun
     : public frc2::CommandHelper<frc2::CommandBase, command_IntakeRun> {
  public:
-  command_IntakeRun(subsystem_Intake* intake, std::function<double()> power);
+  command_IntakeRun(subsystem_Intake* intake, std::function<double()> positivePower, std::function<double()> negativePower);
 
   void Initialize() override;
 
@@ -33,5 +33,6 @@ class command_IntakeRun
 
 private:
   subsystem_Intake* m_intake;
-  std::function<double()> m_power;
+  std::function<double()> m_positivePower;
+  std::function<double()> m_negativePower;
 };

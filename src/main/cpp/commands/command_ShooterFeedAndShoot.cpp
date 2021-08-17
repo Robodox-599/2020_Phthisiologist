@@ -19,7 +19,7 @@ void command_ShooterFeedAndShoot::Initialize() {}
 void command_ShooterFeedAndShoot::Execute() 
 {
   m_shooter->FlywheelSpin(m_flywheelVelocity());
-  m_shooter->HoodMovementByTicks(280);
+  // m_shooter->HoodMovementByTicks(280);
   if(m_shooter->ReturnFlywheelVelocity() > 0.95*m_flywheelVelocity())
   {
     m_shooter->Feed(m_feederPower());

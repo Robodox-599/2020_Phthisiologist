@@ -6,26 +6,29 @@
 /*----------------------------------------------------------------------------*/
 
 #include "RobotContainer.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 #include "Constants.h"
 #include "commands/command_DriveByJoystick.h"
 #include "commands/command_ShooterShoot.h"
 #include "commands/command_ShooterHoodAdjustmentTicks.h"
 #include "commands/command_AimBotAutoAim.h"
 #include "commands/command_AimBotCameraMode.h"
-#include "frc/smartdashboard/SmartDashboard.h"
 #include "commands/command_AimBotDefault.h"
 #include "commands/command_IntakeRunIndexer.h"
 #include "commands/command_ShooterFeedAndShoot.h"
+#include "commands/command_IntakeRun.h"
+#include "commands/command_IntakeMode.h"
 
 RobotContainer::RobotContainer() : m_autonomousCommand() {
   // Initialize all of your commands and subsystems here
   m_drive.SetDefaultCommand(command_DriveByJoystick(&m_drive, [this] {return xbox.GetRawAxis(ControllerConstants::xboxLYAxis);},
   [this] {return xbox.GetRawAxis(ControllerConstants::xboxRXAxis);}));
-  
   m_aimBot.SetDefaultCommand(command_AimBotDefault(&m_aimBot));
   m_shooter.SetDefaultCommand(command_ShooterFeedAndShoot(&m_shooter, [=] {return 0;}, [=] {return 0;}));
-  // m_shooter.SetDefaultCommand(command_ShooterHoodAdjustmentTicks(&m_shooter, [=] {return 120*atk3.GetRawAxis(2)+322;}));
-  m_intake.SetDefaultCommand(command_IntakeRunIndexer(&m_intake, [=] {return 0;}, [=] {return 0;}, [=] {return 0;}));
+  m_shooter.SetDefaultCommand(command_ShooterHoodAdjustmentTicks(&m_shooter, [=] {return 120*atk3.GetRawAxis(2)+322;}));
+  m_intake.SetDefaultCommand(command_IntakeRun(&m_intake, [this] {return xbox.GetRawAxis(ControllerConstants::xboxLTAxis)*0.6;},
+  [this] {return xbox.GetRawAxis(ControllerConstants::xboxRTAxis)*0.6;}));
+
   // Configure the button bindings
   ConfigureButtonBindings();
 }
@@ -38,16 +41,22 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::JoystickButton xboxY(&xbox, ControllerConstants::xboxY);
   frc2::JoystickButton xboxRB(&xbox, ControllerConstants::xboxRB);
   frc2::JoystickButton xboxLB(&xbox, ControllerConstants::xboxLB);
+
   
   xboxA.WhenPressed(command_ShooterFeedAndShoot(&m_shooter, [=] {return 0.8;}, [=] {return 30000;}));
+  // xboxA.WhenPressed(command_IntakeRunIndexer(&m_intake, [=] {return 0.3;}, [=] {return 0.3;}));
   xboxLB.WhenPressed(command_ShooterFeedAndShoot(&m_shooter, [=] {return 0;}, [=] {return 0;}));
-  xboxB.WhenPressed(command_IntakeRunIndexer(&m_intake, [=] {return 0.3;}, [=] {return 0.3;}, [=] {return 0;}));
-  xboxX.WhenPressed(command_IntakeRunIndexer(&m_intake, [=] {return -0.3;}, [=] {return 0.3;}, [=] {return 0;}));
-  xboxY.WhenPressed(command_IntakeRunIndexer(&m_intake, [=] {return 0;}, [=] {return 0;}, [=] {return 0;}));
-  xboxRB.WhenPressed(command_IntakeRunIndexer(&m_intake, [=] {return 0;}, [=] {return 0;}, [=] {return 0.6;}));
+  xboxRB.WhenPressed(command_IntakeMode(&m_intake, &m_shooter));
+  xboxX.WhenPressed(command_ShooterFeedAndShoot(&m_shooter, [=] {return 0;}, [=] {return 0;}));
+  xboxX.WhenPressed(command_IntakeRunIndexer(&m_intake, [=] {return 0;}, [=] {return 0;}));
+  xboxB.WhenPressed(command_IntakeRunIndexer(&m_intake, [=] {return -0.3;}, [=] {return 0.3;}));
+  
 
 
-  //xboxA.WhenPressed(AimBotCameraMode(&m_aimBot));
+ // xboxY.WhenPressed(command_IntakeMode(&m_intake,&m_shooter));
+
+
+  //xboxA.WhenPressed(command_AimBotCameraMode(&m_aimBot));
   //xboxB.WhenPressed(AimBotAutoAim(&m_aimBot, &m_drive));
 }
 

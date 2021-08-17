@@ -7,7 +7,7 @@
 
 #include "commands/command_IntakeRunIndexer.h"
 
-command_IntakeRunIndexer::command_IntakeRunIndexer(subsystem_Intake* intake, std::function<double()> left, std::function<double()> right, std::function<double()> intakePower) : m_intake{intake}, m_left{left}, m_right{right}, m_intakePower{intakePower} {
+command_IntakeRunIndexer::command_IntakeRunIndexer(subsystem_Intake* intake, std::function<double()> left, std::function<double()> right) : m_intake{intake}, m_left{left}, m_right{right} {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({intake});
 }
@@ -19,11 +19,10 @@ void command_IntakeRunIndexer::Initialize() {}
 void command_IntakeRunIndexer::Execute() 
 {
   m_intake->SetIndexerOn(m_left(), m_right());
-  m_intake->SetIntakeWheelsOn(m_intakePower());
 }
 
 // Called once the command ends or is interrupted.
 void command_IntakeRunIndexer::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool command_IntakeRunIndexer::IsFinished() { return false; }
+bool command_IntakeRunIndexer::IsFinished() { return true; }
