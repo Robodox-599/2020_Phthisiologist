@@ -11,9 +11,10 @@
 #include <frc2/command/CommandScheduler.h>
 #include "frc/Compressor.h"
 
-frc::Compressor *comp599;
+frc::Compressor compr{0};
 
 void Robot::RobotInit() {
+  compr.SetClosedLoopControl(true);
 }
 
 /**
@@ -25,7 +26,7 @@ void Robot::RobotInit() {
  * LiveWindow and SmartDashboard integrated updating.
  */
 void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); 
-comp599->SetClosedLoopControl(true);}
+}
 
 /**
  * This function is called once each time the robot enters Disabled mode. You

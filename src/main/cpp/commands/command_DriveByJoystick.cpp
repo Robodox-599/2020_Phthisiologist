@@ -18,7 +18,7 @@ void command_DriveByJoystick::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void command_DriveByJoystick::Execute() {
-  m_subsystem_Drive->JoystickPowerDrive(m_xAxis(), m_yAxis());
+  m_subsystem_Drive->JoystickPowerDrive((0.8*m_xAxis()), (0.8*m_yAxis()));
 }
 
 // Called once the command ends or is interrupted.
