@@ -64,6 +64,19 @@ namespace ClimbConstants
     
     constexpr int climbLockPistonL = 6;
     constexpr int climbLockPistonR = 7;
+
+    constexpr double climbArmEncoderMax = 0;
+    constexpr double climbArmEncoderMin = 0;
+    constexpr double climbArmEncoderLimitPercent = 10;
+    constexpr double climbArmTotalDegrees = 0;
+
+    constexpr double climbArmkF = 0;
+    constexpr double climbArmkP = 0;
+    constexpr double climbArmkI = 0;
+    constexpr double climbArmkD = 0;
+
+    constexpr int climbArmVelocity = 280;
+    constexpr int climbArmAcceleration = 100;    
 }
 
 namespace ShooterConstants

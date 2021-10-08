@@ -18,6 +18,15 @@
 #include "commands/command_ShooterFeedAndShoot.h"
 #include "commands/command_IntakeRun.h"
 #include "commands/command_IntakeMode.h"
+#include "commands/command_ClimbArmByPosition.h"
+#include "commands/command_ClimbArmByPower.h"
+#include "commands/command_ClimbArmByPower.h"
+#include "commands/command_ClimbLock.h"
+#include "commands/command_ClimbUnlock.h"
+#include "subsystems/subsystem_Climb.h"
+// #include "stdio.h"
+// #include "iostream"
+// using namespace std;
 
 RobotContainer::RobotContainer() : m_autonomousCommand() {
   // Initialize all of your commands and subsystems here
@@ -28,6 +37,11 @@ RobotContainer::RobotContainer() : m_autonomousCommand() {
   m_shooter.SetDefaultCommand(command_ShooterHoodAdjustmentTicks(&m_shooter, [=] {return 120*atk3.GetRawAxis(2)+322;}));
   m_intake.SetDefaultCommand(command_IntakeRun(&m_intake, [this] {return xbox.GetRawAxis(ControllerConstants::xboxLTAxis)*0.6;},
   [this] {return xbox.GetRawAxis(ControllerConstants::xboxRTAxis)*0.6;}));
+  m_climb.SetDefaultCommand(command_ClimbUnlock(&m_climb));
+  // bool yay = m_climb.IsClimbLocked();
+  //std::cout() << yay <<"\n";
+  // printf("Hello");
+//  m_climb.SetDefaultCommand(command_ClimbArmByPower(&m_climb,[=] {return 0.0;}));
 
   // Configure the button bindings
   ConfigureButtonBindings();
@@ -42,14 +56,18 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::JoystickButton xboxRB(&xbox, ControllerConstants::xboxRB);
   frc2::JoystickButton xboxLB(&xbox, ControllerConstants::xboxLB);
 
+//  frc2::JoystickButton xboxD(&xbox, ControllerConstants::xboxMenu); 
+
   
-  xboxA.WhenPressed(command_ShooterFeedAndShoot(&m_shooter, [=] {return 0.8;}, [=] {return 30000;}));
+ xboxA.WhenPressed(command_ShooterFeedAndShoot(&m_shooter, [=] {return 0.8;}, [=] {return 30000;}));
   // xboxA.WhenPressed(command_IntakeRunIndexer(&m_intake, [=] {return 0.3;}, [=] {return 0.3;}));
   xboxLB.WhenPressed(command_ShooterFeedAndShoot(&m_shooter, [=] {return 0;}, [=] {return 0;}));
   xboxRB.WhenPressed(command_IntakeMode(&m_intake, &m_shooter));
   xboxX.WhenPressed(command_ShooterFeedAndShoot(&m_shooter, [=] {return 0;}, [=] {return 0;}));
   xboxX.WhenPressed(command_IntakeRunIndexer(&m_intake, [=] {return 0;}, [=] {return 0;}));
   xboxB.WhenPressed(command_IntakeRunIndexer(&m_intake, [=] {return -0.3;}, [=] {return 0.3;}));
+  xboxB.WhenPressed(command_ClimbArmByPower(&m_climb, [=] {return 0.2;}));
+//  xboxA.WhenPressed(command_ClimbUnlock(&m_climb));
   
 
 
@@ -64,3 +82,4 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
   return &m_autonomousCommand;
 }
+
