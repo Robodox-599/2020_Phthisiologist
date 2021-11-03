@@ -53,6 +53,12 @@ namespace ControllerConstants
     constexpr int xboxMenu = 8;
     constexpr int xboxLeftJoyPress = 9;
     constexpr int xboxRightJoyPress = 10;
+
+    constexpr int atk3ArmUp = 6;
+    constexpr int atk3ArmDown = 7;
+    constexpr int atk3WinchUnlock = 8;
+    constexpr int atk3WinchUp = 11;
+    constexpr int atk3WinchDown = 12;
 }
 
 namespace ClimbConstants

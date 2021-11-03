@@ -13,7 +13,10 @@ command_IntakeRunIndexer::command_IntakeRunIndexer(subsystem_Intake* intake, std
 }
 
 // Called when the command is initially scheduled.
-void command_IntakeRunIndexer::Initialize() {}
+void command_IntakeRunIndexer::Initialize() {
+      printf("intake indexer initialize \n");
+
+}
 
 // Called repeatedly when this Command is scheduled to run
 void command_IntakeRunIndexer::Execute() 

@@ -18,29 +18,30 @@ subsystem_Climb::subsystem_Climb() : m_leftWinchMotor(ClimbConstants::leftWinchM
     m_slideMotor.Set(ControlMode::PercentOutput, 0);
 
     m_climbArmMotor.Set(ControlMode::PercentOutput, 0);
+    m_climbArmMotor.SetInverted(true);
 
-    m_climbArmMotor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 0);
+//    m_climbArmMotor.ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 0);
 
-    m_climbArmMotor.SetSensorPhase(false);
+//    m_climbArmMotor.SetSensorPhase(false);
 
-    m_climbArmMotor.Config_kF(0, ClimbConstants::climbArmkF, 0);
-    m_climbArmMotor.Config_kP(0, ClimbConstants::climbArmkP, 0);
-    m_climbArmMotor.Config_kI(0, ClimbConstants::climbArmkI, 0);
-    m_climbArmMotor.Config_kD(0, ClimbConstants::climbArmkD, 0);
+    // m_climbArmMotor.Config_kF(0, ClimbConstants::climbArmkF, 0);
+    // m_climbArmMotor.Config_kP(0, ClimbConstants::climbArmkP, 0);
+    // m_climbArmMotor.Config_kI(0, ClimbConstants::climbArmkI, 0);
+    // m_climbArmMotor.Config_kD(0, ClimbConstants::climbArmkD, 0);
 
-    m_climbArmMotor.ConfigMotionCruiseVelocity(ClimbConstants::climbArmVelocity);
-    m_climbArmMotor.ConfigMotionAcceleration(ClimbConstants::climbArmAcceleration);
+    // m_climbArmMotor.ConfigMotionCruiseVelocity(ClimbConstants::climbArmVelocity);
+    // m_climbArmMotor.ConfigMotionAcceleration(ClimbConstants::climbArmAcceleration);
 
-    m_climbArmEncoderRange = ClimbConstants::climbArmEncoderMax-ClimbConstants::climbArmEncoderMin;
+    // m_climbArmEncoderRange = ClimbConstants::climbArmEncoderMax-ClimbConstants::climbArmEncoderMin;
 
-    m_climbArmLimitOffset = (m_climbArmEncoderRange)*(ClimbConstants::climbArmEncoderLimitPercent/100);
-    m_climbArmLimitMax = ClimbConstants::climbArmEncoderMax - m_climbArmLimitOffset;
-    m_climbArmLimitMin = ClimbConstants::climbArmEncoderMin + m_climbArmLimitOffset;
+    // m_climbArmLimitOffset = (m_climbArmEncoderRange)*(ClimbConstants::climbArmEncoderLimitPercent/100);
+    // m_climbArmLimitMax = ClimbConstants::climbArmEncoderMax - m_climbArmLimitOffset;
+    // m_climbArmLimitMin = ClimbConstants::climbArmEncoderMin + m_climbArmLimitOffset;
 
-    m_climbArmMotor.ConfigForwardSoftLimitThreshold((int)round(m_climbArmLimitMax));
-    m_climbArmMotor.ConfigReverseSoftLimitThreshold((int)round(m_climbArmLimitMin));
-    m_climbArmMotor.ConfigForwardSoftLimitEnable(true);
-    m_climbArmMotor.ConfigReverseSoftLimitEnable(true); 
+    // m_climbArmMotor.ConfigForwardSoftLimitThreshold((int)round(m_climbArmLimitMax));
+    // m_climbArmMotor.ConfigReverseSoftLimitThreshold((int)round(m_climbArmLimitMin));
+    // m_climbArmMotor.ConfigForwardSoftLimitEnable(true);
+    // m_climbArmMotor.ConfigReverseSoftLimitEnable(true); 
 
     //built_different
 

@@ -12,6 +12,8 @@
 
 #include "RobotContainer.h"
 
+#include <cameraserver/CameraServer.h>
+
 class Robot : public frc::TimedRobot {
  public:
   void RobotInit() override;

@@ -15,19 +15,27 @@ command_IntakeMode::command_IntakeMode(subsystem_Intake* intake, subsystem_Shoot
 // Called when the command is initially scheduled.
 void command_IntakeMode::Initialize() 
 {
+  printf("intake command \n");
+
   if(m_intake->IsIntakeDeployed())
   {
     m_intake->SetIntakeUp();
+    printf("intake up \n");
   }
   else
   {
     m_intake->SetIntakeDown();
+        printf("intake down \n");
+
   }
   
 }
 
 // Called repeatedly when this Command is scheduled to run
-void command_IntakeMode::Execute() {}
+void command_IntakeMode::Execute() {
+    printf("intake execute \n");
+
+}
 
 // Called once the command ends or is interrupted.
 void command_IntakeMode::End(bool interrupted) {}

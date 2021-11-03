@@ -14,9 +14,9 @@ subsystem_Drive::subsystem_Drive() :
   m_rearLeftMotor{DriveConstants::rearLeftMotorPort, rev::CANSparkMax::MotorType::kBrushless},
   m_rearRightMotor{DriveConstants::rearRightMotorPort, rev::CANSparkMax::MotorType::kBrushless}
 {
-  m_frontLeftMotor.SetInverted(true);
+  m_frontLeftMotor.SetInverted(false);
   m_frontRightMotor.SetInverted(true);
-  m_rearLeftMotor.SetInverted(true);
+  m_rearLeftMotor.SetInverted(false);
   m_rearRightMotor.SetInverted(true);
 
   // m_rearLeftMotor.Follow(m_frontLeftMotor);
@@ -45,8 +45,8 @@ void subsystem_Drive::SetPositionControl()
 void subsystem_Drive::DriveDistance(int inches)
 {
   SetPositionControl();
-  m_leftPidController.SetReference(ConvertInchesToRotations(inches), rev::ControlType::kPosition);
-  m_rightPidController.SetReference(ConvertInchesToRotations(inches), rev::ControlType::kPosition);
+  m_leftPidController.SetReference(m_leftEncoder.GetPosition() + ConvertInchesToRotations(inches), rev::ControlType::kPosition);
+  m_rightPidController.SetReference(m_rightEncoder.GetPosition() + ConvertInchesToRotations(inches), rev::ControlType::kPosition);
 }
 
 double subsystem_Drive::GetPIDError(int inches)
@@ -94,8 +94,8 @@ void subsystem_Drive::JoystickPowerDrive(double x, double y)
   l = -y + x;
   r = -y - x;
 
-  m_frontLeftMotor.Set(l);
-  m_rearLeftMotor.Set(l);
+  m_frontLeftMotor.Set(-l);
+  m_rearLeftMotor.Set(-l);
   m_frontRightMotor.Set(r);
   m_rearRightMotor.Set(r);
 }

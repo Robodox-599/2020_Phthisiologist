@@ -15,6 +15,8 @@ frc::Compressor compr{0};
 
 void Robot::RobotInit() {
   compr.SetClosedLoopControl(true);
+  cs::UsbCamera camera0 = frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
+  camera0.SetResolution(320, 240);
 }
 
 /**

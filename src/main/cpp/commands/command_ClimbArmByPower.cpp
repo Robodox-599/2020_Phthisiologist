@@ -15,15 +15,18 @@ command_ClimbArmByPower::command_ClimbArmByPower(subsystem_Climb *subsystem_Clim
 }
 
 // Called when the command is initially scheduled.
-void command_ClimbArmByPower::Initialize() {}
+void command_ClimbArmByPower::Initialize() {
+    m_subsystem_Climb->SetClimbArmMotorPower(m_power());
+    printf("climb arm power\n");
+}
 
 // Called repeatedly when this Command is scheduled to run
 void command_ClimbArmByPower::Execute() {
-  m_subsystem_Climb->SetClimbArmMotorPower(m_power()/2);
+    printf("climb arm by power execute \n");
 }
 
 // Called once the command ends or is interrupted.
 void command_ClimbArmByPower::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool command_ClimbArmByPower::IsFinished() { return false; }
+bool command_ClimbArmByPower::IsFinished() { return true; }
