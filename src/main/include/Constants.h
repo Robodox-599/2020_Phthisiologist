@@ -55,10 +55,12 @@ namespace ControllerConstants
     constexpr int xboxRightJoyPress = 10;
 
     constexpr int atk3ArmUp = 6;
-    constexpr int atk3ArmDown = 7;
-    constexpr int atk3WinchUnlock = 8;
+    constexpr int atk3ArmDown = 4;
+    constexpr int atk3WinchUnlock = 7;
     constexpr int atk3WinchUp = 11;
-    constexpr int atk3WinchDown = 12;
+    constexpr int atk3WinchDown = 10;
+    constexpr int atk3TraverseLeft = 8;
+    constexpr int atk3TraverseRight = 9;
 }
 
 namespace ClimbConstants
@@ -82,7 +84,8 @@ namespace ClimbConstants
     constexpr double climbArmkD = 0;
 
     constexpr int climbArmVelocity = 280;
-    constexpr int climbArmAcceleration = 100;    
+    constexpr int climbArmAcceleration = 100;   
+
 }
 
 namespace ShooterConstants

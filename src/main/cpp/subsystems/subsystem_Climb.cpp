@@ -11,7 +11,7 @@
 subsystem_Climb::subsystem_Climb() : m_leftWinchMotor(ClimbConstants::leftWinchMotorPort), m_rightWinchMotor(ClimbConstants::rightWinchMotorPort), m_slideMotor(ClimbConstants::antiTipMotorPort), m_climbArmMotor(ClimbConstants::armMotorPort), m_lockSolenoid(ClimbConstants::climbLockPistonL,ClimbConstants::climbLockPistonR) {
     m_leftWinchMotor.Set(ControlMode::PercentOutput, 0);
     m_rightWinchMotor.Set(ControlMode::PercentOutput, 0);
-    m_rightWinchMotor.SetInverted(true);
+    m_rightWinchMotor.SetInverted(false);
     m_leftWinchMotor.SetInverted(false);
     m_rightWinchMotor.Follow(m_leftWinchMotor);
 
@@ -45,8 +45,8 @@ subsystem_Climb::subsystem_Climb() : m_leftWinchMotor(ClimbConstants::leftWinchM
 
     //built_different
 
-    m_lockSolenoid.Set(frc::DoubleSolenoid::kForward);
-}
+    LockClimb();
+ }
 
 void subsystem_Climb::SetWinchMotorPower(double power)
 {
@@ -55,13 +55,13 @@ void subsystem_Climb::SetWinchMotorPower(double power)
 
 void subsystem_Climb::LockClimb()
 {
-    m_lockSolenoid.Set(frc::DoubleSolenoid::kReverse);
+    m_lockSolenoid.Set(frc::DoubleSolenoid::kForward);
     m_isClimbLocked = true;
 }
 
 void subsystem_Climb::UnlockClimb()
 {
-    m_lockSolenoid.Set(frc::DoubleSolenoid::kForward);
+    m_lockSolenoid.Set(frc::DoubleSolenoid::kReverse);
     m_isClimbLocked = false;
 }
 
